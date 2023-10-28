@@ -35,12 +35,12 @@ export default function Grid () {
 
   return (
     <div className="container">
-      <button onClick={navigateAddRecipe}>Add recipe</button>
-      <button onClick={navigateMyRecipes}>My recipes</button>
-      <button onClick={navigateSearch}>Search</button>
-      <button onClick={navigateTags}>Tags</button>
-      <button onClick={navigateFavorites}>Favorites</button>
-      <button onClick={navigateSettings}>Settings</button>
+      <button className={"grid-button"} onClick={navigateAddRecipe}>Add recipe</button>
+      <button className={"grid-button"} onClick={navigateMyRecipes}>My recipes</button>
+      <button className={"grid-button"} onClick={navigateSearch}>Search</button>
+      <button className={"grid-button"} onClick={navigateTags}>Tags</button>
+      <button className={"grid-button"} onClick={navigateFavorites}>Favorites</button>
+      <button className={"grid-button"} onClick={navigateSettings}>Settings</button>
     </div>
   )
 }
