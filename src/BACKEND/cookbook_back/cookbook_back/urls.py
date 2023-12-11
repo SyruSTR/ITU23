@@ -22,9 +22,10 @@ from cookbook import views
 from cookbook_back import settings
 
 router = routers.DefaultRouter()
-router.register(r'recipes', views.RecipeView, 'recipe')
 router.register(r'add-recipes', views.AddRecipeView, 'add-recipe')
 router.register(r'tags', views.TagView, 'tag')
+router.register(r'shopping-list', views.ShoppingListView, 'shopping-list')
+router.register(r'meal-planner', views.MealPlannerView, 'meal-planner')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

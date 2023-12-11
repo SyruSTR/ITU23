@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe, AddRecipe, Tag
+from .models import AddRecipe, Tag
 # Register your models here.
 
 
@@ -15,16 +15,6 @@ class AddRecipeAdmin(admin.ModelAdmin):
         if len(obj.description) < 48:
             return obj.description
         return obj.description[:48] + '...'
-
-
-@admin.register(Recipe)
-class RecipeAdmin(admin.ModelAdmin):
-
-    list_display = ('id', 'name', 'description', 'notes', 'photo', 'ingredients', 'rating', 'difficulty',
-                   'prep_time', 'cook_time', 'number_of_portions', 'added_by')
-    list_display_links = ('id', 'name')
-    ordering = ('id', )
-
 
 
 @admin.register(Tag)

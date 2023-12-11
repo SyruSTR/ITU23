@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, AddRecipe, Tag
+from .models import AddRecipe, Tag, ShoppingList, MealPlanner
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -16,14 +16,23 @@ class AddRecipeSerializer(serializers.ModelSerializer):
                   'prep_time', 'cook_time', 'number_of_portions', 'added_by')
 
 
+class ShoppingListSerializer(serializers.ModelSerializer):
 
-
-class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Recipe
-        fields = ('id', 'name', 'description', 'notes', 'photo', 'tags', 'ingredients', 'rating', 'difficulty',
-                  'prep_time', 'cook_time', 'number_of_portions', 'added_by')
-        read_only_fields = ('added_by',)
+        model = ShoppingList
+        fields = ('id', 'user', 'ingredients', 'created_at')
+
+
+class MealPlannerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MealPlanner
+        fields = ('id', 'user', 'recipes', 'date', 'meal_type')
+
+
+
+
+
 
 
 
