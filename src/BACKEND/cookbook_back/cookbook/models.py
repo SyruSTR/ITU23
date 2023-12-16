@@ -20,7 +20,6 @@ class AddRecipe(models.Model):
     cook_time = models.PositiveIntegerField(null=True, blank=True)
     number_of_portions = models.PositiveIntegerField(null=True, blank=True)
     tips = models.TextField(null=True, blank=True)
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

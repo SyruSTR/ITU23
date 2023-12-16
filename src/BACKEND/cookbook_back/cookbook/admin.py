@@ -7,7 +7,7 @@ from .models import AddRecipe, Tag
 class AddRecipeAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'name', 'description', 'notes', 'photo', 'ingredients', 'rating', 'difficulty',
-                   'prep_time', 'cook_time', 'number_of_portions', 'added_by')
+                   'prep_time', 'cook_time', 'number_of_portions')
     list_display_links = ('id', 'name')
     ordering = ('id', )
 

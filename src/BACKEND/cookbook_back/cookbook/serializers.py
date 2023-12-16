@@ -13,7 +13,7 @@ class AddRecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AddRecipe
         fields = ('id', 'name', 'description', 'notes', 'photo', 'tags', 'ingredients', 'rating', 'difficulty',
-                  'prep_time', 'cook_time', 'number_of_portions', 'added_by')
+                  'prep_time', 'cook_time', 'number_of_portions')
 
 
 class ShoppingListSerializer(serializers.ModelSerializer):
