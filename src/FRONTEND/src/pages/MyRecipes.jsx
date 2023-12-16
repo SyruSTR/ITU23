@@ -36,7 +36,10 @@ function MyRecipes() {
           </li>
         ))}
       </ul>
-      <Link to="/">Back to Main Page</Link>
+      <div className="navigation-links">
+        <Link to="/">Back to Main Page</Link>
+        <Link to="/myrecipes/shopping-list">Create a shopping list</Link>
+      </div>
     </div>
   );
 }
