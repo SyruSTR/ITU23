@@ -8,12 +8,10 @@ User = get_user_model()
 
 class AddRecipe(models.Model):
 
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    notes = models.TextField()
-    photo = models.ImageField(upload_to='recipe_photos/', null=True, blank=True)
-    tags = models.ManyToManyField('Tag', related_name='add_recipes', blank=True)
-    ingredients = models.TextField()
+    name = models.CharField(max_length=255, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
+    ingredients = models.TextField(null=True, blank=True)
     rating = models.FloatField(null=True, blank=True)
     difficulty = models.CharField(max_length=50, null=True, blank=True)
     prep_time = models.PositiveIntegerField(null=True, blank=True)
