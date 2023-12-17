@@ -27,7 +27,7 @@ class MealPlannerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MealPlanner
-        fields = ('id', 'user', 'recipes', 'date', 'meal_type')
+        fields = ('id', 'recipes', 'date', 'meal_type')
 
 
 

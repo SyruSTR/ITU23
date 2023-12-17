@@ -43,7 +43,6 @@ class ShoppingList(models.Model):
 
 class MealPlanner(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipes = models.ManyToManyField(AddRecipe, related_name='meal_planners')
     date = models.DateField()
     meal_type = models.CharField(max_length=50, choices=[('breakfast', 'Breakfast'), ('lunch', 'Lunch'), ('dinner', 'Dinner')])

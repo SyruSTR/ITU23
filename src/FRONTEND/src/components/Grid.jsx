@@ -37,6 +37,12 @@ export default function Grid () {
         navigate("/addrecipe");
     }
 
+    const navigateMealPlanner = () => {
+        navigate("/meal-planner")
+    }
+
+
+
   return (
     <div className="container">
       <button className={"grid-button"} onClick={navigateAddRecipe}>Add recipe</button>
@@ -45,6 +51,7 @@ export default function Grid () {
       <button className={"grid-button"} onClick={navigateTags}>Tags</button>
       <button className={"grid-button"} onClick={navigateFavorites}>Favorites</button>
       <button className={"grid-button"} onClick={navigateSettings}>Settings</button>
+      <button className={"grid-button"} onClick={navigateMealPlanner}>Meal planner</button>
     </div>
   )
 }
