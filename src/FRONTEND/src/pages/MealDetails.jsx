@@ -57,23 +57,30 @@ const MealDetails = () => {
   }
 
   return (
-    <div>
+    <div className="meal-details-container">
       <h1>Meal Details</h1>
-      <p>Date: {mealPlanner.date}</p>
-      <p>Meal Type: {mealPlanner.meal_type}</p>
+      <p className="detail-text">Date: {mealPlanner.date}</p>
+      <p className="detail-text">Meal Type: {mealPlanner.meal_type}</p>
       {/* Display other details as needed */}
-      <p>Recipes:</p>
-      <ul>
+      <p className="detail-text">Recipes:</p>
+      <ul className="recipe-list">
         {mealPlanner.recipes.map((recipeId) => (
-          <li key={recipeId}>{getRecipeNameById(recipeId)}</li>
+          <li key={recipeId} className="recipe-item">
+            {getRecipeNameById(recipeId)}
+          </li>
         ))}
       </ul>
-      <button onClick={handleDeleteMealPlanner}>Delete meal plan</button>
-      <button onClick={handleUpdateMealPlanner}>Edit meal plan</button>
-      <Link to={'/meal-planner/my-meals'}>Back to my meals</Link>
+      <button className="delete-button" onClick={handleDeleteMealPlanner}>
+        Delete meal plan
+      </button>
+      <button className="edit-button" onClick={handleUpdateMealPlanner}>
+        Edit meal plan
+      </button>
+      <Link to={'/meal-planner/my-meals'} className="back-link">
+        Back to my meals
+      </Link>
     </div>
   );
 };
 
 export default MealDetails;
-

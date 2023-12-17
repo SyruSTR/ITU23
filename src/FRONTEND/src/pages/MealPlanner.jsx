@@ -15,7 +15,6 @@ const MealPlanner = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch Recipes data
         const recipesResponse = await fetch('http://127.0.0.1:8000/api/add-recipes/');
         const recipesData = await recipesResponse.json();
         setRecipes(recipesData);
@@ -30,13 +29,11 @@ const MealPlanner = () => {
   const handleToggleRecipe = (recipeId) => {
     const isSelected = newMealPlanner.recipes.includes(recipeId);
     if (isSelected) {
-      // Recipe is selected, remove it
       setNewMealPlanner((prevMealPlanner) => ({
         ...prevMealPlanner,
         recipes: prevMealPlanner.recipes.filter((id) => id !== recipeId),
       }));
     } else {
-      // Recipe is not selected, add it
       setNewMealPlanner((prevMealPlanner) => ({
         ...prevMealPlanner,
         recipes: [...prevMealPlanner.recipes, recipeId],
@@ -60,7 +57,6 @@ const MealPlanner = () => {
 
         navigate('/meal-planner/my-meals/');
 
-        // Reset the newMealPlanner state for the next meal planner
         setNewMealPlanner({
           date: new Date().toISOString().split('T')[0],
           meal_type: 'breakfast',
@@ -75,9 +71,9 @@ const MealPlanner = () => {
   };
 
   return (
-    <div>
+    <div className="meal-planner-container">
       <h1>Meal Planner</h1>
-      <div>
+      <div className="meal-planner-form">
         <h2>Create New Meal Planner</h2>
         <label>Date:</label>
         <input
@@ -109,28 +105,19 @@ const MealPlanner = () => {
             </li>
           ))}
         </ul>
-        <button onClick={handleCreateMealPlanner}>Create a meal plan</button>
+        <div className="button-container">
+          <button className="create-button" onClick={handleCreateMealPlanner}>
+            Create a meal plan
+          </button>
+        </div>
       </div>
-      <div>
-        <h2>Existing Meal Planners</h2>
-        <ul>
-          {mealPlanner.map((meal) => (
-            <li key={meal.id}>
-              <p>Date: {meal.date}</p>
-              <p>Meal Type: {meal.meal_type}</p>
-              <p>Recipes:</p>
-              <ul>
-                {meal.recipes.map((recipeId) => (
-                  <li key={recipeId}>Recipe Name: {recipes.find((r) => r.id === recipeId)?.name}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+      <div className="button-container">
+        <button className="back-button" onClick={() => navigate('/')}>
+          Back to Main Menu
+        </button>
       </div>
     </div>
   );
 };
 
 export default MealPlanner;
-

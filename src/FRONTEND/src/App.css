@@ -479,3 +479,188 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.my-meals-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.meal-list {
+  list-style: none;
+  padding: 0;
+}
+
+.meal-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+.meal-link {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+.meal-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.meal-date, .meal-type, .meal-recipes {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.recipe-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* MealDetails.css */
+
+.meal-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.delete-button,
+.edit-button {
+  background-color: #ff4136; /* Red for delete button */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.edit-button {
+  background-color: #007bff; /* Blue for edit button */
+}
+
+.delete-button:hover{
+  background-color: #d90000; /* Darker red on hover for delete button */
+}
+
+.edit-button:hover {
+  background-color: #0071ff; /* Darker red on hover for delete button */
+}
+
+.back-link {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #fff; /* White background for the back link */
+  color: #007bff; /* Blue text color */
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  background-color: #eee; /* Lighter gray on hover for the back link */
+}
+
+/* Container styles */
+.meal-planner-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.meal-planner-container h1 {
+  font-size: 24px;
+}
+
+/* Form styles */
+.meal-planner-form {
+  margin-top: 20px;
+}
+
+.meal-planner-form h2 {
+  font-size: 20px;
+}
+
+/* Label styles */
+.meal-planner-form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Input and select styles */
+.meal-planner-form select {
+  width: auto;
+  padding: 10px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Checkbox styles */
+.meal-planner-form input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Recipe list styles */
+.meal-planner-form ul {
+  list-style: none;
+  padding: 0;
+}
+
+.meal-planner-form li {
+  margin-bottom: 10px;
+}
+
+/* Button container styles */
+.button-container {
+  margin-top: 20px;
+}
+
+/* Create button styles */
+.create-button {
+  width: 100%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #45a049;
+}
+
+/* Back button styles */
+.back-button {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
