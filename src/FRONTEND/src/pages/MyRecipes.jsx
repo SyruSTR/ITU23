@@ -1,9 +1,11 @@
+// MyRecipes.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MyRecipes() {
   const [recipes, setRecipes] = useState([]);
   const apiUrl = 'http://localhost:8000/api/add-recipes/';
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(apiUrl)
@@ -46,6 +48,14 @@ function MyRecipes() {
     }
   };
 
+  const handleBackToMainClick = () => {
+    navigate('/');
+  };
+
+  const handleCreateShoppingListClick = () => {
+    navigate('/myrecipes/shopping-list');
+  };
+
   return (
     <div className="my-recipes">
       <h1>My Recipes</h1>
@@ -67,8 +77,8 @@ function MyRecipes() {
         ))}
       </ul>
       <div className="navigation-links">
-        <Link to="/">Back to Main Page</Link>
-        <Link to="/myrecipes/shopping-list">Create a shopping list</Link>
+        <button onClick={handleBackToMainClick}>Back to Main Page</button>
+        <button onClick={handleCreateShoppingListClick}>Create a shopping list</button>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import './App.css';
 
-import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -15,9 +14,9 @@ import Favorites from "./pages/Favorites";
 import Settings from "./pages/Settings";
 import ShoppingList from "./pages/Shopping-List";
 import RecipeDetail from "./pages/RecipeDetail";
-
 import MealPlanner from "./pages/MealPlanner"
 import MyMeals from "./pages/MyMeals"
+import EditRecipe from "./pages/EditRecipe";
 
 function App () {
     return (
@@ -34,6 +33,7 @@ function App () {
                 <Route path="/meal-planner" element={<MealPlanner />} />
                 <Route path="/meal-planner/my-meals" element={<MyMeals />} />
                 <Route path="/myrecipes/shopping-list" element={<ShoppingList />} />
+                <Route path="/recipe/:recipeId/edit-recipe" element={<EditRecipe />} />
             </Routes>
         </Router>
     );
