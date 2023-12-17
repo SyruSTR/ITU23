@@ -30,9 +30,19 @@ function AddRecipe( {history} ) {
   // }, []);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+
+  // Check if the Enter key is pressed and the target element is a textarea
+  if (e.key === 'Enter' && e.target.tagName.toLowerCase() === 'textarea') {
+    e.preventDefault(); // Prevent the default behavior (adding a newline)
+
+    // Insert a newline character in the textarea value
+    const updatedValue = `${value}\n`;
+    setRecipeData((prevData) => ({ ...prevData, [name]: updatedValue }));
+  } else {
     setRecipeData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

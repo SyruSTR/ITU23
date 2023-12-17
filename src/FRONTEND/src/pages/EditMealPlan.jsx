@@ -23,7 +23,7 @@ const EditMealPlan = () => {
         setFormData({
           date: mealPlannerData.date,
           meal_type: mealPlannerData.meal_type,
-          recipes: mealPlannerData.recipes.map(recipe => String(recipe.id)),
+          recipes: mealPlannerData.recipes,
         });
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -62,12 +62,18 @@ const EditMealPlan = () => {
 
   const handleUpdateMealPlanner = async () => {
     try {
+      // Convert recipe IDs to numbers before sending the request
+      const updatedFormData = {
+        ...formData,
+        recipes: formData.recipes.map(id => Number(id)),
+      };
+
       const response = await fetch(`http://127.0.0.1:8000/api/meal-planner/${id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
 
       if (response.ok) {
@@ -87,39 +93,37 @@ const EditMealPlan = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Edit Meal Plan</h1>
-      <label>
-        Date:
-        <input type="date" name="date" value={formData.date} onChange={handleInputChange} />
-      </label>
-      <label>
-        Meal Type:
-        <select name="meal_type" value={formData.meal_type} onChange={handleInputChange}>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-      </label>
-      <label>
-        Recipes:
-        <ul>
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="recipes"
-                  value={String(recipe.id)}
-                  checked={formData.recipes.includes(String(recipe.id))}
-                  onChange={handleInputChange}
-                />
-                {recipe.name}
-              </label>
-            </li>
-          ))}
-        </ul>
-      </label>
+      <label htmlFor="date">Date:</label>
+      <input type="date" id="date" name="date" value={formData.date} onChange={handleInputChange} />
+
+      <label htmlFor="mealType">Meal Type:</label>
+      <select id="mealType" name="meal_type" value={formData.meal_type} onChange={handleInputChange}>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+      </select>
+
+      <label htmlFor="recipes">Recipes:</label>
+      <ul>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>
+            <label>
+              <input
+                type="checkbox"
+                id={`recipe-${recipe.id}`}
+                name="recipes"
+                value={String(recipe.id)}
+                checked={formData.recipes.includes(String(recipe.id))}
+                onChange={handleInputChange}
+              />
+              {recipe.name}
+            </label>
+          </li>
+        ))}
+      </ul>
+
       <button onClick={handleUpdateMealPlanner}>Update Meal Planner</button>
       <Link to={`/meal-planner/my-meals/meal-details/${id}`}>Cancel</Link>
     </div>

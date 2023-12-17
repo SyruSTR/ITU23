@@ -12,7 +12,7 @@ import Search from "./pages/Search";
 import Tags from "./pages/Tags";
 import Favorites from "./pages/Favorites";
 import Settings from "./pages/Settings";
-import ShoppingList from "./pages/Shopping-List";
+import ShoppingList from "./pages/ShoppingList";
 import RecipeDetail from "./pages/RecipeDetail";
 import MealDetails from "./pages/MealDetails";
 import MealPlanner from "./pages/MealPlanner"
@@ -36,7 +36,7 @@ function App () {
                 <Route path="/meal-planner/my-meals" element={<MyMeals />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id" element={<MealDetails />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id/edit-meal/:id" element={<EditMealPlan />} />
-                <Route path="/myrecipes/shopping-list" element={<ShoppingList />} />
+                <Route path="/myrecipes/recipe/:recipeId/shopping-list" element={<ShoppingList />} />
                 <Route path="/recipe/:recipeId/edit-recipe" element={<EditRecipe />} />
             </Routes>
         </Router>
