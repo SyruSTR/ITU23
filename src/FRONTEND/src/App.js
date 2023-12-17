@@ -1,3 +1,5 @@
+//Authors: Murad Mikogaziev, Oleg Borshch, Nikita Vetluzhskikh
+
 import './App.css';
 
 import {

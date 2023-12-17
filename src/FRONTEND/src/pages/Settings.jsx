@@ -1,3 +1,5 @@
+//Authors: Nikita Vetluzhskikh
+
 import "../App";
 import "../App.css";
 import React, { useState} from "react";

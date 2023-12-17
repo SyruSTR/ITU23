@@ -1,3 +1,5 @@
+//Authors: Murad Mikogaziev, Oleg Borshch, Nikita Vetluzhskikh
+
 import React from "react";
 import "./Grid.css"
 import {useNavigate} from "react-router-dom";
