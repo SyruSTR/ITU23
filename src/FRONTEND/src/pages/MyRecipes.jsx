@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function MyRecipes() {
   const [recipes, setRecipes] = useState([]);
-  const apiUrl = 'http://localhost:8000/api/add-recipes/'; // Replace with your API URL
+  const apiUrl = 'http://localhost:8000/api/add-recipes/';
 
   useEffect(() => {
     fetch(apiUrl)
@@ -25,9 +25,8 @@ function MyRecipes() {
       });
   }, [apiUrl]);
 
-    const handleDeleteRecipe = async (recipeId) => {
+  const handleDeleteRecipe = async (recipeId) => {
     try {
-      // Send a DELETE request to the API
       const response = await fetch(`http://localhost:8000/api/add-recipes/${recipeId}`, {
         method: 'DELETE',
         headers: {
@@ -36,12 +35,10 @@ function MyRecipes() {
       });
 
       if (!response.ok) {
-        // Handle error, maybe show a message to the user
         console.error('Failed to delete recipe');
         return;
       }
 
-      // Update the recipes state after successful deletion
       const updatedRecipes = recipes.filter((recipe) => recipe.id !== recipeId);
       setRecipes(updatedRecipes);
     } catch (error) {
@@ -49,30 +46,32 @@ function MyRecipes() {
     }
   };
 
-    return (
-      <div className="my-recipes">
-        <h1>My Recipes</h1>
-        <ul className="recipe-list">
-          {recipes.map((recipe) => (
-            <li className="recipe-item" key={recipe.id}>
+  return (
+    <div className="my-recipes">
+      <h1>My Recipes</h1>
+      <ul className="recipe-list">
+        {recipes.map((recipe) => (
+          <li className="recipe-item" key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`} className="recipe-link">
               <div className="recipe-details">
                 <h2>{recipe.name}</h2>
                 <p>{recipe.description}</p>
               </div>
-              <div className="recipe-actions">
-                <button onClick={() => handleDeleteRecipe(recipe.id)}>
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="navigation-links">
-          <Link to="/">Back to Main Page</Link>
-          <Link to="/myrecipes/shopping-list">Create a shopping list</Link>
-        </div>
+            </Link>
+            <div className="recipe-actions">
+              <button onClick={() => handleDeleteRecipe(recipe.id)}>
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="navigation-links">
+        <Link to="/">Back to Main Page</Link>
+        <Link to="/myrecipes/shopping-list">Create a shopping list</Link>
       </div>
-    );
+    </div>
+  );
 }
 
 export default MyRecipes;
