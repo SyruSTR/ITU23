@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AddRecipe( {history} ) {
   const [recipeData, setRecipeData] = useState({
@@ -16,18 +16,18 @@ function AddRecipe( {history} ) {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/tags/');
-        const data = await response.json();
-        // setAvailableTags(data);
-      } catch (error) {
-        console.error('Error fetching tags:', error);
-      }
-    };
-    fetchTags();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTags = async () => {
+  //     try {
+  //       const response = await fetch('http://127.0.0.1:8000/api/tags/');
+  //       const data = await response.json();
+  //       // setAvailableTags(data);
+  //     } catch (error) {
+  //       console.error('Error fetching tags:', error);
+  //     }
+  //   };
+  //   fetchTags();
+  // }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,12 +70,12 @@ function AddRecipe( {history} ) {
 
       const responseData = await response.json();
       console.log('Recipe added successfully:', responseData);
-        navigate('/recipe/' + JSON.stringify(responseData['id']));
+
+      navigate('/recipe/' + JSON.stringify(responseData['id']));
+
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
-
-
   };
 
   return (

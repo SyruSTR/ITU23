@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MealPlanner = () => {
   const [mealPlanner, setMealPlanner] = useState([]);
@@ -8,7 +9,9 @@ const MealPlanner = () => {
     meal_type: 'breakfast',
     recipes: [],
   });
-  const [redirect, setRedirect] = useState(false);
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,16 +27,6 @@ const MealPlanner = () => {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    // Redirect to the "MyMeals"
-    if (redirect) {
-      window.location.href = '/meal-planner/my-meals';
-
-      // Reset the redirect state to prevent continuous redirection
-      setRedirect(false);
-    }
-  }, [redirect]);
 
   const handleAddRecipe = (recipeId) => {
     setNewMealPlanner((prevMealPlanner) => ({
@@ -56,8 +49,7 @@ const MealPlanner = () => {
         const createdMealPlanner = await response.json();
         setMealPlanner([...mealPlanner, createdMealPlanner]);
 
-        // Set the redirect state to trigger redirection
-        setRedirect(true);
+        navigate('/meal-planner/my-meals/');
 
         // Reset the newMealPlanner state for the next meal planner
         setNewMealPlanner({
