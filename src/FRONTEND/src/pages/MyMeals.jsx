@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const MyMeals = () => {
   const [mealPlanners, setMealPlanners] = useState([]);
@@ -7,7 +8,6 @@ const MyMeals = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const mealPlannersResponse = await fetch('http://127.0.0.1:8000/api/meal-planner/');
         const mealPlannersData = await mealPlannersResponse.json();
         setMealPlanners(mealPlannersData);
@@ -32,18 +32,22 @@ const MyMeals = () => {
     <div>
       <h1>My Meals</h1>
       <ul>
-        {mealPlanners.map((meal) => (
+        {mealPlanners.map((meal, index) => (
           <li key={meal.id}>
-            <p>Date: {meal.date}</p>
-            <p>Meal Type: {meal.meal_type}</p>
-            <p>Recipes:</p>
-            <ul>
-              {meal.recipes.map((recipeId) => (
-                <li key={recipeId}>
-                  {getRecipeNameById(recipeId)}
-                </li>
-              ))}
-            </ul>
+            <Link to={`meal-details/${meal.id}`}>
+              <p>{`Meal #${index + 1}`}</p>
+              </Link>
+              <p>Date: {meal.date}</p>
+              <p>Meal Type: {meal.meal_type}</p>
+              <p>Recipes:</p>
+              <ul>
+                {meal.recipes.map((recipeId) => (
+                  <li key={recipeId}>
+                    {getRecipeNameById(recipeId)}
+                  </li>
+                ))}
+              </ul>
+
           </li>
         ))}
       </ul>
