@@ -14,16 +14,17 @@ function AddRecipe() {
     number_of_portions: 1,
   });
 
-  // const [availableTags, setAvailableTags] = useState([]);
-
   useEffect(() => {
-    // Fetch available tags from the API endpoint
-    fetch('http://127.0.0.1:8000/api/tags/')
-      .then((response) => response.json())
-      // .then((data) => {
-      //   setAvailableTags(data);
-      // })
-      .catch((error) => console.error('Error fetching tags:', error));
+    const fetchTags = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/tags/');
+        const data = await response.json();
+        // setAvailableTags(data);
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    };
+    fetchTags();
   }, []);
 
   const handleInputChange = (e) => {
@@ -31,25 +32,14 @@ function AddRecipe() {
     setRecipeData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setRecipeData((prevData) => ({ ...prevData, photo: file }));
-  // };
-  //
-  // const handleTagChange = (e) => {
-  //   const selectedTags = Array.from(e.target.selectedOptions, (option) => option.value);
-  //   setRecipeData((prevData) => ({ ...prevData, tags: selectedTags }));
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
 
     for (const key in recipeData) {
-        data.append(key, recipeData[key]);
+      data.append(key, recipeData[key]);
     }
-
 
     const formData = {
       name: data.get('name'),
@@ -61,26 +51,26 @@ function AddRecipe() {
       prep_time: data.get('prep_time'),
       cook_time: data.get('cook_time'),
       number_of_portions: data.get('number_of_portions'),
-    }
-    // console.log(JSON.stringify(formData));
+    };
 
-    fetch('http://127.0.0.1:8000/api/add-recipes/', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to add recipe');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Recipe added successfully:', data);
-      })
-      .catch((error) => console.error('Error adding recipe:', error));
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/add-recipes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add recipe');
+      }
+
+      const responseData = await response.json();
+      console.log('Recipe added successfully:', responseData);
+    } catch (error) {
+      console.error('Error adding recipe:', error);
+    }
   };
 
   return (
