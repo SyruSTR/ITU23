@@ -12,7 +12,6 @@ const MealPlanner = () => {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,11 +27,21 @@ const MealPlanner = () => {
     fetchData();
   }, []);
 
-  const handleAddRecipe = (recipeId) => {
-    setNewMealPlanner((prevMealPlanner) => ({
-      ...prevMealPlanner,
-      recipes: [...prevMealPlanner.recipes, recipeId],
-    }));
+  const handleToggleRecipe = (recipeId) => {
+    const isSelected = newMealPlanner.recipes.includes(recipeId);
+    if (isSelected) {
+      // Recipe is selected, remove it
+      setNewMealPlanner((prevMealPlanner) => ({
+        ...prevMealPlanner,
+        recipes: prevMealPlanner.recipes.filter((id) => id !== recipeId),
+      }));
+    } else {
+      // Recipe is not selected, add it
+      setNewMealPlanner((prevMealPlanner) => ({
+        ...prevMealPlanner,
+        recipes: [...prevMealPlanner.recipes, recipeId],
+      }));
+    }
   };
 
   const handleCreateMealPlanner = async () => {
@@ -89,12 +98,18 @@ const MealPlanner = () => {
         <ul>
           {recipes.map((recipe) => (
             <li key={recipe.id}>
-              {recipe.name}{' '}
-              <button onClick={() => handleAddRecipe(recipe.id)}>Add to Meal Planner</button>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={newMealPlanner.recipes.includes(recipe.id)}
+                  onChange={() => handleToggleRecipe(recipe.id)}
+                />
+                {recipe.name}
+              </label>
             </li>
           ))}
         </ul>
-        <button onClick={handleCreateMealPlanner}>Create Meal Planner</button>
+        <button onClick={handleCreateMealPlanner}>Create a meal plan</button>
       </div>
       <div>
         <h2>Existing Meal Planners</h2>
@@ -118,3 +133,4 @@ const MealPlanner = () => {
 };
 
 export default MealPlanner;
+
