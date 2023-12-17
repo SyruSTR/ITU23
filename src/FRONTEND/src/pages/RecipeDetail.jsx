@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const RecipeDetail = ({ match }) => {
+const RecipeDetail = () => {
+  const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
     // Fetch recipe details from the API using the recipe ID from the URL params
-    fetch(`http://127.0.0.1:8000/api/recipes/${match.params.recipeId}`)
+    fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}`)
       .then((response) => response.json())
       .then((data) => {
         setRecipe(data);
       })
       .catch((error) => console.error('Error fetching recipe details:', error));
-  }, [match.params.recipeId]);
+  }, [recipeId]);
 
   if (!recipe) {
     return <div>Loading...</div>;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
-function AddRecipe() {
+function AddRecipe( {history} ) {
   const [recipeData, setRecipeData] = useState({
     name: '',
     description: '',
@@ -13,6 +13,8 @@ function AddRecipe() {
     cook_time: 0,
     number_of_portions: 1,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -68,9 +70,12 @@ function AddRecipe() {
 
       const responseData = await response.json();
       console.log('Recipe added successfully:', responseData);
+        navigate('/recipe/' + JSON.stringify(responseData['id']));
     } catch (error) {
       console.error('Error adding recipe:', error);
     }
+
+
   };
 
   return (

@@ -33,6 +33,10 @@ export default function Grid () {
         navigate("/settings")
     }
 
+    const navigateRecipeDetail = () => {
+        navigate("/addrecipe");
+    }
+
   return (
     <div className="container">
       <button className={"grid-button"} onClick={navigateAddRecipe}>Add recipe</button>

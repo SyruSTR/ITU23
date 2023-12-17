@@ -23,4 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/.idea
-/src/BACKEND/.idea
+/src/BACKEND/.idea!/src/FRONTEND/package.json
+/src/FRONTEND/package-lock.json
+/src/BACKEND/cookbook_back/db.sqlite3
