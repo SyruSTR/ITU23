@@ -14,6 +14,7 @@ import Tags from "./pages/Tags";
 import Favorites from "./pages/Favorites";
 import Settings from "./pages/Settings";
 import ShoppingList from "./pages/Shopping-List";
+import RecipeDetail from "./pages/RecipeDetail";
 
 
 function App () {
@@ -27,6 +28,7 @@ function App () {
                 <Route path="/search" element={<Search />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/tags" element={<Tags />} />
+                <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
                 <Route path="/myrecipes/shopping-list" element={<ShoppingList />} />
             </Routes>
         </Router>
