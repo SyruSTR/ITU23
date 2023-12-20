@@ -1,8 +1,9 @@
 """ Author: Oleg Borshch """
 
 from rest_framework import viewsets
-from .serializers import AddRecipeSerializer, TagSerializer, ShoppingListSerializer, MealPlannerSerializer
-from .models import AddRecipe, Tag, ShoppingList, MealPlanner
+from .serializers import AddRecipeSerializer, TagSerializer, ShoppingListSerializer, MealPlannerSerializer, \
+    FavouriteRecipeSerializer
+from .models import AddRecipe, Tag, ShoppingList, MealPlanner, FavouriteRecipe
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -38,8 +39,15 @@ class AddRecipeView(viewsets.ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class FavouriteRecipeView(viewsets.ModelViewSet):
+
+    queryset = FavouriteRecipe.objects.all()
+    serializer_class = FavouriteRecipeSerializer
+
+
 # View for handling Tag model operations (CRUD)
 class TagView(viewsets.ModelViewSet):
+
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
 

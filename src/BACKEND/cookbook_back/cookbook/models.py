@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 # Import the User model dynamically to support custom user models
 User = get_user_model()
 
+
 # Model representing a recipe
 class AddRecipe(models.Model):
     # Fields for recipe details
@@ -20,10 +21,20 @@ class AddRecipe(models.Model):
     cook_time = models.PositiveIntegerField(null=True, blank=True)
     number_of_portions = models.PositiveIntegerField(null=True, blank=True)
     tips = models.TextField(null=True, blank=True)
+    is_favourite = models.BooleanField(default=False)
 
     def __str__(self):
         # Return a human-readable representation of the recipe
         return self.name
+
+
+class FavouriteRecipe(models.Model):
+
+    recipe = models.ForeignKey(AddRecipe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.recipe.name}"
+
 
 # Model representing a tag for categorizing recipes
 class Tag(models.Model):
@@ -33,6 +44,7 @@ class Tag(models.Model):
     def __str__(self):
         # Return a human-readable representation of the tag
         return self.tag_name
+
 
 # Model representing a user's shopping list
 class ShoppingList(models.Model):
@@ -44,6 +56,7 @@ class ShoppingList(models.Model):
     def __str__(self):
         # Return a human-readable representation of the shopping list
         return f"Shopping List for {self.user.username}"
+
 
 # Model representing a meal planner for a user
 class MealPlanner(models.Model):

@@ -25,6 +25,7 @@ from cookbook_back import settings
 
 router = routers.DefaultRouter()
 router.register(r'add-recipes', views.AddRecipeView, 'add-recipe')
+router.register(r'favourite-recipe', views.FavouriteRecipeView, 'favourite-recipe')
 router.register(r'tags', views.TagView, 'tag')
 router.register(r'shopping-list', views.ShoppingListView, 'shopping-list')
 router.register(r'meal-planner', views.MealPlannerView, 'meal-planner')

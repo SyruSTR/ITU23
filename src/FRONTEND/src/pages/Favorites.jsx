@@ -1,29 +1,37 @@
 //Authors: Murad Mikogaziev
 
-import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 
-function Favorite() {
-    const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+const Favorite = () => {
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
-    return (
-        <div className="favorite-recipes">
-            <h1>Favorite Recipes</h1>
-            <ul className="recipe-list">
-                {favoriteRecipes.length > 0 ? (
-                    favoriteRecipes.map((recipe) => (
-                        <li className="recipe-item" key={recipe.id}>
-                            <h2>{recipe.name}</h2>
-                            <p>{recipe.description}</p>
-                        </li>
-                    ))
-                ) : (
-                    <p>No favorite recipes found.</p>
-                )}
-            </ul>
-            <Link to="/">Back to Main Page</Link>
-        </div>
-    );
-}
+  useEffect(() => {
+    const fetchFavoriteRecipes = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/favourite-recipe/');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setFavoriteRecipes(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchFavoriteRecipes();
+  }, []); // Empty dependency array ensures that the effect runs once when the component mounts
+
+  return (
+    <div>
+      <h1>Favorite Recipes</h1>
+      <ul>
+        {favoriteRecipes.map((recipe) => (
+          <li key={recipe.id}>{recipe.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Favorite;
