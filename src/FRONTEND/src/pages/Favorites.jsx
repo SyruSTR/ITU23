@@ -4,30 +4,45 @@ import React, { useState, useEffect } from 'react';
 
 const Favorite = () => {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    const fetchFavoriteRecipes = async () => {
+    const fetchRecipesData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/favourite-recipe/');
-        if (!response.ok) {
+        const favoriteResponse = await fetch('http://127.0.0.1:8000/api/favourite-recipe/');
+        const recipesResponse = await fetch('http://127.0.0.1:8000/api/add-recipes/');
+
+        if (!favoriteResponse.ok || !recipesResponse.ok) {
           throw new Error('Failed to fetch data');
         }
-        const data = await response.json();
-        setFavoriteRecipes(data);
+
+        const favoriteData = await favoriteResponse.json();
+        const recipesData = await recipesResponse.json();
+
+        setFavoriteRecipes(favoriteData);
+        setRecipes(recipesData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchFavoriteRecipes();
-  }, []); // Empty dependency array ensures that the effect runs once when the component mounts
+    fetchRecipesData();
+  }, []);
+
+
+  const getRecipeNameById = (recipeId) => {
+    const recipe = recipes.find((r) => r.id === recipeId);
+    return recipe ? recipe.name : 'Recipe not found';
+  };
 
   return (
     <div>
       <h1>Favorite Recipes</h1>
       <ul>
         {favoriteRecipes.map((recipe) => (
-          <li key={recipe.id}>{recipe.name}</li>
+          <li key={recipe.recipe}>
+            {getRecipeNameById(recipe.recipe)}
+          </li>
         ))}
       </ul>
     </div>
