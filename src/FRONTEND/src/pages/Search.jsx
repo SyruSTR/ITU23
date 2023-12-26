@@ -1,26 +1,37 @@
-//Authors: Murad Mikogaziev
+// Authors: Murad Mikogaziev
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [allRecipes, setAllRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = async () => {
-    try {
-      // Make an API request to search recipes by name
-      const response = await fetch(`http://127.0.0.1:8000/api/search-recipes?name=${searchTerm}`);
+  useEffect(() => {
+    const fetchAllRecipes = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/add-recipes/');
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch search results');
+        if (!response.ok) {
+          throw new Error('Failed to fetch recipes');
+        }
+
+        const recipes = await response.json();
+        setAllRecipes(recipes);
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
       }
+    };
 
-      const results = await response.json();
-      setSearchResults(results);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
+    fetchAllRecipes();
+  }, []);
+
+  const handleSearch = () => {
+    const results = allRecipes.filter((recipe) =>
+      recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
   };
 
   return (
@@ -35,14 +46,21 @@ function Search() {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <ul className="search-results">
-        {searchResults.map((recipe) => (
-          <li className="search-result" key={recipe.id}>
-            <h2>{recipe.name}</h2>
-            <p>{recipe.description}</p>
-          </li>
-        ))}
-      </ul>
+      {searchResults.length > 0 ? (
+        <ul className="search-results">
+          {searchResults.map((recipe) => (
+            <li className="search-result" key={recipe.id}>
+              <h2>{recipe.name}</h2>
+              <p>{recipe.description}</p>
+              {/* Additional information can be displayed as needed */}
+              <p>Difficulty: {recipe.difficulty}</p>
+              <p>Rating: {recipe.rating}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No results found.</p>
+      )}
       <Link to="/">Back to Main Page</Link>
     </div>
   );

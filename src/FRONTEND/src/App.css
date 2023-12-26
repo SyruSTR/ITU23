@@ -1,36 +1,57 @@
+/* Reset Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin-top: 30px;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Common Container Styles */
+.container,
+.profile-settings,
+.search-page,
+.my-recipes,
+.favorite-recipes,
+.tags-page,
+.recipe-detail-container,
+.grid-item,
+.edit-recipe-container,
+.my-meals-container,
+.meal-item,
+.meal-details-container,
+.meal-planner-container,
+.favorite-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Header Styles */
 h1 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
-h2 {
-    font-size: 18px;
-    margin: 0;
-}
-
+h2,
 h3 {
-    font-size: 18px;
-    margin: 0;
+  font-size: 18px;
+  margin: 0;
 }
 
+/* Label Styles */
 label {
-    font-weight: bold;
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
 }
 
-input[type=text] {
+/* Input Styles */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select,
+button {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -40,291 +61,40 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=number] {
+input[type="number"] {
   width: 20%;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
-input[type=file] {
-  margin: 8px 0;
-  display: block;
-}
-
-select {
-  width: 20%;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
+/* Button Styles */
+input[type="submit"],
+.button,
+.settings-button,
+.edit-button,
+.back-button,
+.create-button,
+.delete-button {
   width: 100%;
-  background-color: #04AA6D;
-  color: white;
   padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+.input[type="submit"]:hover,
+.button:hover,
+.settings-button:hover,
+.edit-button:hover,
+.back-button:hover,
+.create-button:hover,
+.delete-button:hover {
   background-color: #45a049;
 }
 
-.button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-.profile-settings {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.settings-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.settings-button:hover {
-    background-color: #0056b3;
-}
-
-.search-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-results {
-    list-style: none;
-    padding: 0;
-}
-
-.search-result {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-}
-
-
-
-.my-recipes {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-list {
-    list-style: none;
-    padding: 0;
-}
-
-.recipe-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-}
-
-.favorite-recipes {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.recipe-list {
-    list-style: none;
-    padding: 0;
-}
-
-.recipe-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-}
-
-.tags-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.tag-list ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.tag-list li {
-    padding: 5px 10px;
-    margin: 5px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.tag-list li.selected {
-    background-color: #0056b3;
-}
-
-.search-results h2 {
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-.recipe-list {
-    list-style: none;
-    padding: 0;
-}
-
-.recipe-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-}
-
+/* Navigation Links Styles */
 .navigation-links {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-}
-
-.my-recipes {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.my-recipes .recipe-actions button {
-  margin-right: 10px;
-  padding: 10px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.my-recipes .recipe-actions button:hover {
-  background-color: #0056b3;
-}
-
-.my-recipes .navigation-links button {
-  margin-right: 10px;
-  padding: 10px 16px;
-  background-color: #fff;
-  color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.my-recipes .navigation-links button:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.recipe-list {
-  list-style: none;
-  padding: 0;
-}
-
-.recipe-item {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.recipe-link {
-  text-decoration: none;
-  color: #333;
-}
-
-.recipe-details {
-  flex: 1;
-}
-
-.recipe-actions {
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.navigation-links {
-  margin-top: 20px;
 }
 
 a {
@@ -338,188 +108,29 @@ a:hover {
   text-decoration: underline;
 }
 
-/* RecipeDetail Component */
-.recipe-detail-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Search Page Styles */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.recipe-detail-container h1 {
-  font-size: 24px;
-}
-
-.recipe-detail-container p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.edit-button {
-  padding: 10px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.edit-button:hover {
-  background-color: #0056b3;
-}
-
-.back-button {
-  display: inline-block;
-  padding: 10px 16px;
-  background-color: #fff; /* Change to white background */
-  color: #007bff; /* Change to blue text color */
-  text-decoration: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.back-button:hover {
-  background-color: #eee; /* Change to a slightly different color on hover */
-}
-
-/* Navigation Links */
-/* Add this to your existing CSS */
-
-.recipe-detail-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.grid-item {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.button-container {
-  grid-column: span 2;
-  text-align: center;
-}
-
-.edit-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-button:hover {
-  background-color: #0056b3;
-}
-
-
-.edit-recipe-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.edit-recipe-button {
-  margin-right: 10px;
-  padding: 10px 16px;
-  background-color: #fff;
-  color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.edit-recipe-button:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-input[type=text],
-input[type=number],
-select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-select {
-  width: 100%;
-}
-
-button {
-  width: 100%;
-  background-color: #007bff;
-  color: #fff;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.my-meals-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.meal-list {
-  list-style: none;
-  padding: 0;
-}
-
+/* Result/List Styles */
+.search-results,
+.recipe-list,
+.tag-list ul,
+.meal-list,
+.recipe-item,
 .meal-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  margin: 20px 0;
-  background-color: #f9f9f9;
-}
-
-.meal-link {
-  text-decoration: none;
-  color: #007BFF;
-}
-
-.meal-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.meal-date, .meal-type, .meal-recipes {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.recipe-list {
   list-style: none;
   padding: 0;
 }
 
-.recipe-item {
+/* Item Styles */
+.search-result,
+.recipe-item,
+.tag-list li,
+.meal-item {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
@@ -527,17 +138,42 @@ button:hover {
   background-color: #f9f9f9;
 }
 
-/* MealDetails.css */
-
-.meal-details-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* Tag List Styles */
+.tag-list li {
+  padding: 5px 10px;
+  margin: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
+.tag-list li.selected {
+  background-color: #0056b3;
+}
+
+/* Recipe/Meal Item Styles */
+.recipe-item,
+.meal-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* Recipe Detail Styles */
+.recipe-details,
+.meal-details-container .button-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* Delete/Edit Button Styles */
 .delete-button,
-.edit-button {
-  background-color: #ff4136; /* Red for delete button */
+.edit-button,
+.edit-recipe-button {
+  background-color: #007bff;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -546,49 +182,32 @@ button:hover {
   margin-right: 10px;
 }
 
-.edit-button {
-  background-color: #007bff; /* Blue for edit button */
+.delete-button:hover,
+.edit-button:hover,
+.edit-recipe-button:hover {
+  background-color: #0056b3;
 }
 
-.delete-button:hover{
-  background-color: #d90000; /* Darker red on hover for delete button */
-}
-
-.edit-button:hover {
-  background-color: #0071ff; /* Darker red on hover for delete button */
-}
-
-.back-link {
+/* Back Link Styles */
+.back-link,
+.back-button {
   display: inline-block;
   padding: 10px 16px;
-  background-color: #fff; /* White background for the back link */
-  color: #007bff; /* Blue text color */
+  background-color: #fff;
+  color: #007bff;
   text-decoration: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.back-link:hover {
-  background-color: #eee; /* Lighter gray on hover for the back link */
+.back-link:hover,
+.back-button:hover {
+  background-color: #eee;
 }
 
-/* Container styles */
-.meal-planner-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Header styles */
-.meal-planner-container h1 {
-  font-size: 24px;
-}
-
-/* Form styles */
-.meal-planner-form {
+/* Meal Planner Form Styles */
+.meal-planner-form,
+.meal-planner-container .button-container {
   margin-top: 20px;
 }
 
@@ -596,14 +215,100 @@ button:hover {
   font-size: 20px;
 }
 
-/* Label styles */
+/* Checkbox Styles */
+.meal-planner-form input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* List Styles */
+.meal-planner-form ul,
+.recipe-list,
+.meal-list {
+  list-style: none;
+  padding: 0;
+}
+
+.meal-planner-form li {
+  margin-bottom: 10px;
+}
+
+/* Create/Back Button Styles */
+.create-button,
+.back-button {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-button:hover,
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* My Meals Container Styles */
+.my-meals-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Meal List Styles */
+.meal-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* Meal Link Styles */
+.meal-link {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+/* Meal Title Styles */
+.meal-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Meal Date/Type/Recipes Styles */
+.meal-date,
+.meal-type,
+.meal-recipes {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Meal Details Container Styles */
+.meal-details-container,
+.meal-planner-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Meal Planner Container Styles */
+.meal-planner-container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Meal Planner Form Styles */
+.meal-planner-form {
+  margin-top: 20px;
+}
+
+/* Meal Planner Form Label Styles */
 .meal-planner-form label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
 
-/* Input and select styles */
+/* Meal Planner Form Select Styles */
 .meal-planner-form select {
   width: auto;
   padding: 10px;
@@ -614,28 +319,13 @@ button:hover {
   box-sizing: border-box;
 }
 
-/* Checkbox styles */
-.meal-planner-form input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-/* Recipe list styles */
-.meal-planner-form ul {
-  list-style: none;
-  padding: 0;
-}
-
-.meal-planner-form li {
-  margin-bottom: 10px;
-}
-
-/* Button container styles */
-.button-container {
+/* Meal Planner Form Button Container Styles */
+.meal-planner-form .button-container {
   margin-top: 20px;
 }
 
-/* Create button styles */
-.create-button {
+/* Meal Planner Form Create Button Styles */
+.meal-planner-form .create-button {
   width: 100%;
   background-color: #04AA6D;
   color: white;
@@ -645,22 +335,53 @@ button:hover {
   cursor: pointer;
 }
 
-.create-button:hover {
+.meal-planner-form .create-button:hover {
   background-color: #45a049;
 }
 
-/* Back button styles */
-.back-button {
-  width: 100%;
-  background-color: #007bff;
-  color: #fff;
-  padding: 14px 20px;
+/* Favorite Container Styles */
+.favorite-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Favorite Heading Styles */
+.favorite-heading {
+  color: #333;
+}
+
+/* Favorite List Styles */
+.favorite-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Favorite Item Styles */
+.favorite-item {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #555;
+}
+
+.back-to-menu-button {
+  display: block;
+  margin-top: 10px; /* Adjust as needed */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #3498db; /* Change to your preferred button color */
+  color: #ffffff; /* Change to your preferred text color */
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 16px; /* Adjust as needed */
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+
+  /* Optional: Add more styles for hover effect */
 }
 
-.back-button:hover {
-  background-color: #0056b3;
+.back-to-menu-button:hover {
+  background-color: #2078b5; /* Change to your preferred hover color */
 }
-

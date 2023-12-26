@@ -1,20 +1,28 @@
 .grid-button {
     display: inline-block;
-    width: 323px;
+    width: 32%;
     height: 60px;
     font-size: 18px;
     text-align: center;
-    text-decoration: none;
     background-color: #0077cc;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     padding: 0;
     margin: 5px;
 }
 
 .grid-button:hover {
     background-color: #0055aa;
+}
+
+.grid-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
