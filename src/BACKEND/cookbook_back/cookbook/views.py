@@ -2,16 +2,20 @@
 
 from rest_framework import viewsets
 from .serializers import AddRecipeSerializer, TagSerializer, ShoppingListSerializer, MealPlannerSerializer, \
-    FavouriteRecipeSerializer
-from .models import AddRecipe, Tag, ShoppingList, MealPlanner, FavouriteRecipe
+    FavouriteRecipeSerializer, UserProfileSerializer
+from .models import AddRecipe, Tag, ShoppingList, MealPlanner, FavouriteRecipe, UserProfile
 from rest_framework import status
 from rest_framework.response import Response
 
 
+class UserProfileView(viewsets.ModelViewSet):
+
+    serializer_class = UserProfileSerializer
+    queryset = UserProfile.objects.all()
+
+
 # View for handling AddRecipe model operations (CRUD)
 class AddRecipeView(viewsets.ModelViewSet):
-    # Uncomment the line below to enforce authentication for this view
-    # permission_classes = [IsAuthenticated]
 
     serializer_class = AddRecipeSerializer
     queryset = AddRecipe.objects.all()

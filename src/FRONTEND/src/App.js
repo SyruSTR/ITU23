@@ -35,6 +35,8 @@ function App () {
                 <Route path="/tags" element={<Tags />} />
                 <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
                 <Route path="/meal-planner" element={<MealPlanner />} />
+                <Route path="/my-meals" element={<MyMeals />} />
+                <Route path="/my-meals/meal-details/:id" element={<MealDetails />} />
                 <Route path="/meal-planner/my-meals" element={<MyMeals />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id" element={<MealDetails />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id/edit-meal/:id" element={<EditMealPlan />} />

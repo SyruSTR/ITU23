@@ -1,11 +1,28 @@
 """ Author: Oleg Borshch """
 
-
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
-# Import the User model dynamically to support custom user models
-User = get_user_model()
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+    def delete(self, *args, **kwargs):
+        self.user.delete()
+        super().delete(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        self.user.first_name = self.first_name
+        self.user.last_name = self.last_name
+        self.user.save()
+
+    def __str__(self):
+        return self.user.username
 
 
 # Model representing a recipe
@@ -42,20 +59,19 @@ class Tag(models.Model):
     tag_name = models.CharField(max_length=50)
 
     def __str__(self):
-        # Return a human-readable representation of the tag
+        # Return a readable representation of the tag
         return self.tag_name
 
 
 # Model representing a user's shopping list
 class ShoppingList(models.Model):
     # Associate the shopping list with a user using a foreign key
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     ingredients = models.TextField()  # Field for storing the list of ingredients
     created_at = models.DateTimeField(auto_now_add=True)  # Automatically set creation timestamp
 
     def __str__(self):
-        # Return a human-readable representation of the shopping list
-        return f"Shopping List for {self.user.username}"
+        # Return a readable representation of the shopping list
+        return f"Shopping List"
 
 
 # Model representing a meal planner for a user
@@ -66,7 +82,7 @@ class MealPlanner(models.Model):
     meal_type = models.CharField(max_length=50, choices=[('breakfast', 'Breakfast'), ('lunch', 'Lunch'), ('dinner', 'Dinner')])
 
     def __str__(self):
-        # Return a human-readable representation of the meal planner
+        # Return a readable representation of the meal planner
         return f"Meal Planner for {self.user.username} on {self.date} - {self.meal_type}"
 
 

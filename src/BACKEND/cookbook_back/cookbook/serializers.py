@@ -1,7 +1,7 @@
 """ Author: Oleg Borshch """
 
 from rest_framework import serializers
-from .models import Tag, AddRecipe, ShoppingList, MealPlanner, FavouriteRecipe
+from .models import Tag, AddRecipe, ShoppingList, MealPlanner, FavouriteRecipe, UserProfile, User
 
 
 # Serializer for the Tag model
@@ -10,6 +10,28 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         # Specify the fields to include in the serialized representation
         fields = ('id', 'tag_name')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    password = serializers.CharField(write_only=True)
+    username = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = ('id', 'username', 'password', 'email', 'first_name', 'last_name')
+
+    def create(self, validated_data):
+        username = validated_data.pop('username')
+        password = validated_data.pop('password')
+
+        user = User.objects.create(username=username)
+        user.set_password(password)
+        user.save()
+
+        profile = UserProfile.objects.create(user=user, **validated_data)
+
+        return profile
 
 
 # Serializer for the AddRecipe model
@@ -32,7 +54,7 @@ class ShoppingListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShoppingList
         # Specify the fields to include in the serialized representation
-        fields = ('id', 'user', 'ingredients', 'created_at')
+        fields = ('id', 'ingredients', 'created_at')
 
 
 # Serializer for the MealPlanner model
