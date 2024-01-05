@@ -39,6 +39,7 @@ class AddRecipe(models.Model):
     number_of_portions = models.PositiveIntegerField(null=True, blank=True)
     tips = models.TextField(null=True, blank=True)
     is_favourite = models.BooleanField(default=False)
+    picture = models.ImageField(upload_to='recipe_photos', null=True, blank=True)
 
     def __str__(self):
         # Return a human-readable representation of the recipe

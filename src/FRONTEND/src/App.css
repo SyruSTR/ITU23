@@ -385,3 +385,35 @@ a:hover {
 .back-to-menu-button:hover {
   background-color: #2078b5; /* Change to your preferred hover color */
 }
+
+/* MyRecipes.css */
+.my-recipes-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.recipe-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recipe-item {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.recipe-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.recipe-actions {
+  margin-top: 10px;
+}
+
+.navigation-links {
+  margin-top: 20px;
+}

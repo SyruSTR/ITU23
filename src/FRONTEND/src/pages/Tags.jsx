@@ -1,7 +1,9 @@
 //Authors: Murad Mikogaziev
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 function Tags() {
     const [tags, setTags] = useState(['Italian', 'Chicken', 'Dessert', 'Vegetarian', 'Healthy']);
@@ -28,6 +30,7 @@ function Tags() {
 
     return (
         <div className="tags-page">
+            <Header />
             <h1>Tags</h1>
             <div className="tag-list">
                 <ul>

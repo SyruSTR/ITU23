@@ -1,6 +1,7 @@
 // Author: Oleg Borshch
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 const EditRecipe = () => {
   const { recipeId } = useParams();
@@ -25,7 +26,7 @@ const EditRecipe = () => {
   const handleSaveClick = async () => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}/`, {
-        method: 'PUT', // Use PUT for updating existing resource
+        method: 'PUT', // Use PUT for updating an existing resource
         headers: {
           'Content-Type': 'application/json',
         },
@@ -50,9 +51,10 @@ const EditRecipe = () => {
 
   return (
     <div className="container">
+      <Header /> {/* Include the Header component */}
       {editedRecipe && (
-          <>
-            <h1>Edit Recipe</h1>
+        <>
+          <h1>Edit Recipe</h1>
             <label htmlFor="editedName">Name</label>
             <input
                 type="text"

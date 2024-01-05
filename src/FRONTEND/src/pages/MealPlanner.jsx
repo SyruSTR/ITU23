@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 const MealPlanner = () => {
   const [mealPlanner, setMealPlanner] = useState([]);
@@ -74,6 +75,7 @@ const MealPlanner = () => {
 
   return (
     <div className="meal-planner-container">
+      <Header />
       <h1>Meal Planner</h1>
       <div className="meal-planner-form">
         <h2>Create New Meal Planner</h2>
@@ -110,6 +112,11 @@ const MealPlanner = () => {
         <div className="button-container">
           <button className="create-button" onClick={handleCreateMealPlanner}>
             Create a meal plan
+          </button>
+
+          {/* New button for navigating to the 'my-meals' page */}
+          <button className="view-my-meals-button" onClick={() => navigate('/meal-planner/my-meals/')}>
+            View My Meals
           </button>
         </div>
       </div>

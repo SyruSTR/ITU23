@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 const RecipeDetail = () => {
   const { recipeId } = useParams();
@@ -28,6 +30,7 @@ const RecipeDetail = () => {
 
   return (
     <div className="recipe-detail-container">
+      <Header />
       {recipe && (
         <div className="grid-container">
           <h1>{recipe.name}</h1>

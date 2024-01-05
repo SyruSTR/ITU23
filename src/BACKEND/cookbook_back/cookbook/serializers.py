@@ -40,7 +40,7 @@ class AddRecipeSerializer(serializers.ModelSerializer):
         model = AddRecipe
         # Specify the fields to include in the serialized representation
         fields = ('id', 'name', 'description', 'notes', 'ingredients', 'rating', 'difficulty',
-                  'prep_time', 'cook_time', 'number_of_portions', 'is_favourite')
+                  'prep_time', 'cook_time', 'number_of_portions', 'is_favourite', 'picture')
 
 
 class FavouriteRecipeSerializer(serializers.ModelSerializer):

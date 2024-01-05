@@ -1,7 +1,7 @@
 //Authors: Nikita Vetluzhskikh
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 const EditMealPlan = () => {
   const { id } = useParams();
@@ -96,6 +96,7 @@ const EditMealPlan = () => {
 
   return (
     <div className="container">
+      <Header /> {/* Include the Header component */}
       <h1>Edit Meal Plan</h1>
       <label htmlFor="date">Date:</label>
       <input type="date" id="date" name="date" value={formData.date} onChange={handleInputChange} />

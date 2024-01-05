@@ -1,4 +1,3 @@
-
 //Authors: Murad Mikogaziev
 
 
@@ -6,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../components/Header';
+
 
 function MyRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -147,6 +148,7 @@ function MyRecipes() {
 
   return (
       <div className="my-recipes">
+        <Header />
         <h1>My Recipes</h1>
         <ul className="recipe-list">
           {recipes.map((recipe) => (

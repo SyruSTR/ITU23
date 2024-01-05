@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 const ShoppingList = () => {
   const { recipeId } = useParams();
@@ -68,6 +70,7 @@ const ShoppingList = () => {
 
   return (
     <div>
+      <Header />
       <h1>Shopping List for {recipe.name}</h1>
       <ul>
         {recipe.ingredients.map((ingredient) => (

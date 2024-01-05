@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 const MyMeals = () => {
   const [mealPlanners, setMealPlanners] = useState([]);
@@ -32,6 +33,7 @@ const MyMeals = () => {
 
   return (
     <div className="my-meals-container">
+      <Header />
       <h1>My Meals</h1>
       <ul className="meal-list">
         {mealPlanners.map((meal, index) => (

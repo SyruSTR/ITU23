@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 function Search() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,6 +38,7 @@ function Search() {
 
   return (
     <div className="search-page">
+      <Header />
       <h1>Search Recipes</h1>
       <div className="search-bar">
         <input
