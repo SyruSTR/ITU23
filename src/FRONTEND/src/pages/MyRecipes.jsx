@@ -146,46 +146,49 @@ function MyRecipes() {
     navigate('/myrecipes/shopping-list');
   };
 
-  return (
-      <div className="my-recipes">
-        <Header />
-        <h1>My Recipes</h1>
-        <ul className="recipe-list">
-          {recipes.map((recipe) => (
-              <li className="recipe-item" key={recipe.id}>
-                <Link to={`/recipe/${recipe.id}`} className="recipe-link">
-                  <div className="recipe-details">
-                    <h2>{recipe.name}</h2>
-                    <p>{recipe.description}</p>
-                  </div>
-                </Link>
-                <div className="recipe-actions">
-                  <button onClick={() => handleDeleteRecipe(recipe.id)}>
-                    Delete
-                  </button>
-                  {userFavorites.includes(recipe.id) ? (
-                    <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
-                      Remove from Favourites
-                    </button>
-                  ) : (
-                    <button onClick={() => handleToggleFavorite(recipe.id)}>
-                      Add to Favourites
-                    </button>
-                  )}
+return (
+    <div className="my-recipes">
+      <Header />
+      <h1>My Recipes</h1>
+      <ul className="recipe-list">
+        {recipes.map((recipe) => (
+          <li className="recipe-item" key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`} className="recipe-link">
+              <div className="recipe-details">
+                {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image" />}
+                <div className="text-details">
+                  <h2 className="recipe-name">{recipe.name}</h2>
+                  <p className="recipe-description">{recipe.description}</p>
                 </div>
-              </li>
-          ))}
-        </ul>
-        <div className="navigation-links">
-          <button onClick={handleBackToMainClick}>Back to Main Page</button>
-          <button onClick={handleCreateShoppingListClick}>Create a shopping list</button>
-        </div>
-
-        {/* Toastify container for notifications */}
-        <ToastContainer/>
+              </div>
+            </Link>
+            <div className="recipe-actions">
+              <div onClick={(e) => e.stopPropagation()}>
+                <button onClick={() => handleDeleteRecipe(recipe.id)}>
+                  Delete
+                </button>
+                {userFavorites.includes(recipe.id) ? (
+                  <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
+                    Remove from Favourites
+                  </button>
+                ) : (
+                  <button onClick={() => handleToggleFavorite(recipe.id)}>
+                    Add to Favourites
+                  </button>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="navigation-links">
+        <button onClick={handleBackToMainClick}>Back to Main Page</button>
+        <button onClick={handleCreateShoppingListClick}>Create a shopping list</button>
       </div>
+
+      <ToastContainer />
+    </div>
   );
 }
-
 
 export default MyRecipes;

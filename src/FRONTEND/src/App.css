@@ -50,9 +50,17 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="file"],
-select,
-button {
+select {
   width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
   padding: 12px 20px;
   margin: 8px 0;
   display: block;
@@ -73,7 +81,6 @@ input[type="submit"],
 .back-button,
 .create-button,
 .delete-button {
-  width: 100%;
   padding: 14px 20px;
   border: none;
   border-radius: 4px;
@@ -235,7 +242,6 @@ a:hover {
 /* Create/Back Button Styles */
 .create-button,
 .back-button {
-  width: 100%;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -339,7 +345,6 @@ a:hover {
   background-color: #45a049;
 }
 
-/* Favorite Container Styles */
 .favorite-container {
   max-width: 600px;
   margin: 0 auto;
@@ -354,13 +359,11 @@ a:hover {
   color: #333;
 }
 
-/* Favorite List Styles */
 .favorite-list {
   list-style-type: none;
   padding: 0;
 }
 
-/* Favorite Item Styles */
 .favorite-item {
   margin-bottom: 10px;
   font-size: 18px;
@@ -369,7 +372,7 @@ a:hover {
 
 .back-to-menu-button {
   display: block;
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px;
   padding: 10px 20px; /* Adjust padding as needed */
   background-color: #3498db; /* Change to your preferred button color */
   color: #ffffff; /* Change to your preferred text color */
@@ -378,8 +381,6 @@ a:hover {
   font-size: 16px; /* Adjust as needed */
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth background color transition on hover */
-
-  /* Optional: Add more styles for hover effect */
 }
 
 .back-to-menu-button:hover {
@@ -393,16 +394,23 @@ a:hover {
   padding: 20px;
 }
 
-.recipe-list {
-  list-style: none;
-  padding: 0;
-}
-
 .recipe-item {
+  display: flex; /* Use flexbox to align items in a row */
+  justify-content: space-between; /* Space between items, pushing the buttons to the right */
   margin-bottom: 20px;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 5px;
+}
+
+.recipe-actions {
+  display: flex;
+  align-items: center;
+}
+
+.recipe-actions button {
+  margin-right: 10px;
+  width: auto;
 }
 
 .recipe-link {
@@ -410,10 +418,20 @@ a:hover {
   color: #333;
 }
 
-.recipe-actions {
-  margin-top: 10px;
-}
-
 .navigation-links {
   margin-top: 20px;
+}
+
+.recipe-image {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Set the height equal to the width to maintain a square */
+  object-fit: cover; /* Ensure the image covers the square */
+  margin-right: 20px; /* Adjust the margin as needed */
+  border-radius: 5px; /* Add border-radius for smooth corners */
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.recipe-name {
+  margin-top: 30px;
 }
