@@ -1,7 +1,7 @@
 // Authors: Murad Mikogaziev
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Header from '../components/Header';
 
 
@@ -9,6 +9,7 @@ function Search() {
   const [searchTerm, setSearchTerm] = useState('');
   const [allRecipes, setAllRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllRecipes = async () => {
@@ -34,6 +35,10 @@ function Search() {
       recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
+  };
+
+  const handleBackToMainClick = () => {
+    navigate('/');
   };
 
   return (
@@ -64,7 +69,9 @@ function Search() {
       ) : (
         <p>No results found.</p>
       )}
-      <Link to="/">Back to Main Page</Link>
+      <div className="navigation-links">
+        <button onClick={handleBackToMainClick}>Back to main page</button>
+      </div>
     </div>
   );
 }

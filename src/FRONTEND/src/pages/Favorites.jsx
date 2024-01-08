@@ -78,9 +78,6 @@ function MyRecipes() {
     navigate('/');
   };
 
-  const handleCreateShoppingListClick = () => {
-    navigate('/myrecipes/shopping-list');
-  };
 
   return (
     <div className="my-recipes">
@@ -105,7 +102,6 @@ function MyRecipes() {
       </ul>
       <div className="navigation-links">
         <button onClick={handleBackToMainClick}>Back to Main Page</button>
-        <button onClick={handleCreateShoppingListClick}>Create a shopping list</button>
       </div>
 
       {/* Toastify container for notifications */}

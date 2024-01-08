@@ -76,9 +76,8 @@ const MealPlanner = () => {
   return (
     <div className="meal-planner-container">
       <Header />
-      <h1>Meal Planner</h1>
       <div className="meal-planner-form">
-        <h2>Create a new meal for the day</h2>
+        <h1>Create a new meal for the day</h1>
         <label>Date:</label>
         <input
           type="date"

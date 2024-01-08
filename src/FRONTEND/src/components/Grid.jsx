@@ -54,17 +54,8 @@ export default function Grid() {
         <button className="grid-button" onClick={navigateMyRecipes}>
           My recipes
         </button>
-        <button className="grid-button" onClick={navigateSearch}>
-          Search
-        </button>
-        <button className="grid-button" onClick={navigateTags}>
-          Tags
-        </button>
         <button className="grid-button" onClick={navigateFavorites}>
           Favorites
-        </button>
-        <button className="grid-button" onClick={navigateSettings}>
-          Settings
         </button>
         <button className="grid-button" onClick={navigateMealPlanner}>
           Meal planner

@@ -142,6 +142,10 @@ function MyRecipes() {
     navigate('/');
   };
 
+  const handleSearch = () => {
+    navigate('/myrecipes/search');
+  };
+
   const handleCreateShoppingListClick = () => {
     navigate('/myrecipes/shopping-list');
   };
@@ -181,6 +185,7 @@ return (
       </ul>
       <div className="navigation-links">
         <button onClick={handleBackToMainClick}>Back to main page</button>
+        <button onClick={handleSearch}>Recipe search</button>
       </div>
 
       <ToastContainer />
