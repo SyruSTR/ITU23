@@ -1,8 +1,6 @@
-// Authors: Nikita Vetluzhskikh
-
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import Header from '../components/Header'; // Import the Header component
+import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 const MealDetails = () => {
   const { id } = useParams();
@@ -63,8 +61,9 @@ const MealDetails = () => {
   };
 
   return (
-      <div className="meal-details-container">
-        <Header /> {/* Include the Header component */}
+    <div className="meal-details-container">
+      <Header />
+      <div className="meal-details-content">
         <h1>Meal Details</h1>
         <p className="detail-text">Date: {mealPlanner.date}</p>
         <p className="detail-text">Meal Type: {mealPlanner.meal_type}</p>
@@ -78,13 +77,14 @@ const MealDetails = () => {
         </ul>
         <div className="recipe-actions">
           <button className="edit-button" onClick={handleUpdateMealPlanner}>
-            Edit meal plan
+            Edit Meal Plan
           </button>
           <button className="button" onClick={handleBackToMeals}>
-            Back to your meals
+            Back to Your Meals
           </button>
         </div>
       </div>
+    </div>
   );
 };
 

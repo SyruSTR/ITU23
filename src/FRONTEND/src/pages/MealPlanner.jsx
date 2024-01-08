@@ -90,6 +90,7 @@ const MealPlanner = () => {
           type="date"
           value={newMealPlanner.date}
           onChange={(e) => setNewMealPlanner({ ...newMealPlanner, date: e.target.value })}
+          style={{ width: '220px', margin: '5px 0' }} // Adjust width and margin as needed
         />
         <label>Meal type:</label>
         <div className="meal-type-options" style={{ display: 'flex', gap: '10px' }}>
@@ -136,17 +137,17 @@ const MealPlanner = () => {
           <button className="create-button" onClick={handleCreateMealPlanner}>
             Create a meal plan
           </button>
-
-          {/* New button for navigating to the 'my-meals' page */}
-          <button className="view-my-meals-button" onClick={() => navigate('/meal-planner/my-meals/')}>
-            View My Meals
-          </button>
         </div>
       </div>
       <div className="button-container">
-        <button className="button" onClick={() => navigate('/')}>
-          Back to Main Menu
-        </button>
+        <div className="flex-container">
+          <button className="button" onClick={handleBackToMainClick}>
+            Back to Main Menu
+          </button>
+          <button className="button" onClick={() => navigate('/meal-planner/my-meals/')}>
+            View My Meals
+          </button>
+        </div>
       </div>
     </div>
   );

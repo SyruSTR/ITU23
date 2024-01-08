@@ -47,7 +47,9 @@ const ShoppingList = () => {
               </li>
             ))}
           </ul>
-          <button onClick={handleBackToMainMenu}>Back to Main Menu</button>
+          <div className="navigation-links">
+            <button className="button" onClick={handleBackToMainMenu}>Back to main page</button>
+          </div>
         </>
       )}
     </div>

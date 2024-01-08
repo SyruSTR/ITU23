@@ -59,7 +59,7 @@ function Favorites() {
   return (
     <div className="my-recipes">
       <Header />
-      <h1>My Recipes</h1>
+      <h1>My favorite recipes</h1>
       <ul className="recipe-list">
         {favoriteRecipes.map((recipe) => (
           <li className="recipe-item" key={recipe.id}>
@@ -72,14 +72,14 @@ function Favorites() {
                 </div>
               </div>
             </Link>
-            <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
+            <button className="button" onClick={() => handleRemoveFromFavorites(recipe.id)}>
               Remove from favorites
             </button>
           </li>
         ))}
       </ul>
       <div className="navigation-links">
-        <button onClick={handleBackToMainClick}>Back to Main Page</button>
+        <button className="button" onClick={handleBackToMainClick}>Back to Main Page</button>
       </div>
 
       <ToastContainer />

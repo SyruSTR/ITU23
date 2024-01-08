@@ -90,6 +90,10 @@ const EditMealPlan = () => {
     }
   };
 
+  const handleBackToMeal = () => {
+    navigate(`/meal-planner/my-meals/meal-details/${id}`);
+  };
+
   if (!mealPlanner || !recipes.length) {
     return <p>Loading...</p>;
   }
@@ -128,7 +132,7 @@ const EditMealPlan = () => {
       </ul>
 
       <button onClick={handleUpdateMealPlanner}>Update Meal Planner</button>
-      <Link to={`/meal-planner/my-meals/meal-details/${id}`}>Cancel</Link>
+      <button onClick={handleBackToMeal}>Back to meal</button>
     </div>
   );
 };

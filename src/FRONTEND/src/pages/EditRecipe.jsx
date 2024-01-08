@@ -184,7 +184,7 @@ const EditRecipe = () => {
             />
 
             <div className="recipe-actions">
-              <button className="edit-button" type="submit" onClick={handleSaveClick}>
+              <button className="button" type="submit" onClick={handleSaveClick}>
                 Save
               </button>
               <button className="button" onClick={handleBackToMainClick}>
