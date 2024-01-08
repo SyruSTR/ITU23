@@ -56,7 +56,7 @@ class TagView(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
 
 
-# View for handling ShoppingList model operations (CRUD)
+# View for handling AddShoppingList model operations (CRUD)
 class ShoppingListView(viewsets.ModelViewSet):
     serializer_class = ShoppingListSerializer
     queryset = ShoppingList.objects.all()

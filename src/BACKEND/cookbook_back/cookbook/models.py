@@ -42,7 +42,7 @@ class AddRecipe(models.Model):
     picture = models.ImageField(upload_to='recipe_photos', null=True, blank=True)
 
     def __str__(self):
-        # Return a human-readable representation of the recipe
+        # Return a readable representation of the recipe
         return self.name
 
 
@@ -66,9 +66,8 @@ class Tag(models.Model):
 
 # Model representing a user's shopping list
 class ShoppingList(models.Model):
-    # Associate the shopping list with a user using a foreign key
-    ingredients = models.TextField()  # Field for storing the list of ingredients
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set creation timestamp
+
+    ingredient = models.TextField()  # Field for storing the list of ingredients
 
     def __str__(self):
         # Return a readable representation of the shopping list
