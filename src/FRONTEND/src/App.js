@@ -40,7 +40,7 @@ function App () {
                 <Route path="/meal-planner/my-meals" element={<MyMeals />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id" element={<MealDetails />} />
                 <Route path="/meal-planner/my-meals/meal-details/:id/edit-meal/:id" element={<EditMealPlan />} />
-                <Route path="/myrecipes/recipe/:recipeId/shopping-list" element={<ShoppingList />} />
+                <Route path="/shopping-list" element={<ShoppingList />} />
                 <Route path="/recipe/:recipeId/edit-recipe" element={<EditRecipe />} />
             </Routes>
         </Router>

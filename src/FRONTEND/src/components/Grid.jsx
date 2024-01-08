@@ -40,10 +40,14 @@ export default function Grid() {
     navigate('/my-meals');
   };
 
+  const navigateShoppingList = () => {
+    navigate('/shopping-list');
+  };
+
   return (
     <div>
       <div className="grid-container">
-      <Header /> {/* Include the Header component */}
+        <Header/> {/* Include the Header component */}
         <button className="grid-button" onClick={navigateAddRecipe}>
           Add recipe
         </button>
@@ -67,6 +71,9 @@ export default function Grid() {
         </button>
         <button className="grid-button" onClick={navigateMyMeals}>
           My meals
+        </button>
+        <button className="grid-button" onClick={navigateShoppingList}>
+          Shopping list
         </button>
       </div>
     </div>

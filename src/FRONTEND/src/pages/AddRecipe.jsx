@@ -1,6 +1,9 @@
+// AddRecipe.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import Rating from '../components/Rating';
 
 function AddRecipe() {
   const [recipeData, setRecipeData] = useState({
@@ -18,18 +21,8 @@ function AddRecipe() {
 
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
-
-    if (type === 'file') {
-      setRecipeData((prevData) => ({ ...prevData, [name]: e.target.files[0] }));
-    } else if (e.key === 'Enter' && e.target.tagName.toLowerCase() === 'textarea') {
-      e.preventDefault();
-      const updatedValue = `${value}\n`;
-      setRecipeData((prevData) => ({ ...prevData, [name]: updatedValue }));
-    } else {
-      setRecipeData((prevData) => ({ ...prevData, [name]: value }));
-    }
+  const handleInputChange = (name, value) => {
+    setRecipeData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -64,6 +57,15 @@ function AddRecipe() {
     navigate('/');
   };
 
+  const handleFileInputChange = (e) => {
+    handleInputChange('picture', e.target.files[0]);
+  };
+
+  const handleBrowseClick = () => {
+    // Trigger the file input when the styled button is clicked
+    document.getElementById('fileInput').click();
+  };
+
   return (
     <div className="container">
       <Header />
@@ -75,7 +77,7 @@ function AddRecipe() {
             id="name"
             name="name"
             value={recipeData.name}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('name', e.target.value)}
             required
         />
 
@@ -85,17 +87,16 @@ function AddRecipe() {
             id="description"
             name="description"
             value={recipeData.description}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('description', e.target.value)}
             required
         />
 
         <label htmlFor="notes">Notes</label>
-        <input
-            type="text"
+        <textarea
             id="notes"
             name="notes"
             value={recipeData.notes}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('notes', e.target.value)}
         />
 
         <label htmlFor="ingredients">Ingredients</label>
@@ -103,31 +104,59 @@ function AddRecipe() {
             id="ingredients"
             name="ingredients"
             value={recipeData.ingredients}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('ingredients', e.target.value)}
         />
 
+        <label htmlFor="picture">Picture</label>
+        <div className="file-input-container">
+          <button
+              type="button"
+              className="file-input-button"
+              onClick={handleBrowseClick}
+          >
+            Choose PNG image
+          </button>
+          <input
+              type="file"
+              id="fileInput"
+              name="picture"
+              onChange={handleFileInputChange}
+              style={{display: 'none'}}
+          />
+        </div>
+
         <label htmlFor="rating">Rating</label>
-        <input
-            type="number"
-            id="rating"
-            name="rating"
-            min="1"
-            max="5"
-            value={recipeData.rating}
-            onChange={handleInputChange}
+        <Rating
+            rating={recipeData.rating}
+            onChange={(newRating) => handleInputChange('rating', newRating)}
         />
 
         <label htmlFor="difficulty">Difficulty</label>
-        <select
-            id="difficulty"
-            name="difficulty"
-            value={recipeData.difficulty}
-            onChange={handleInputChange}
-        >
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
+        <div className="difficulty-options">
+          <button
+              type="button"
+              className={`difficulty-button easy ${recipeData.difficulty === 'easy' ? 'selected' : ''}`}
+              onClick={() => handleInputChange('difficulty', 'easy')}
+          >
+            Easy
+          </button>
+
+          <button
+              type="button"
+              className={`difficulty-button medium ${recipeData.difficulty === 'medium' ? 'selected' : ''}`}
+              onClick={() => handleInputChange('difficulty', 'medium')}
+          >
+            Medium
+          </button>
+
+          <button
+              type="button"
+              className={`difficulty-button hard ${recipeData.difficulty === 'hard' ? 'selected' : ''}`}
+              onClick={() => handleInputChange('difficulty', 'hard')}
+          >
+            Hard
+          </button>
+        </div>
 
         <label htmlFor="prep-time">Prep time (minutes)</label>
         <input
@@ -135,7 +164,7 @@ function AddRecipe() {
             id="prep-time"
             name="prep_time"
             value={recipeData.prep_time}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('prep_time', e.target.value)}
         />
 
         <label htmlFor="cook-time">Cook time (minutes)</label>
@@ -144,33 +173,26 @@ function AddRecipe() {
             id="cook-time"
             name="cook_time"
             value={recipeData.cook_time}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('cook_time', e.target.value)}
         />
 
-        <label htmlFor="portions">Amount of portions</label>
+        <label htmlFor="portions">Number of portions</label>
         <input
             type="number"
             id="portions"
             name="number_of_portions"
             value={recipeData.number_of_portions}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange('number_of_portions', e.target.value)}
         />
-
-        <label htmlFor="picture">Picture</label>
-        <input
-            type="file"
-            id="picture"
-            name="picture"
-            onChange={handleInputChange}
-        />
-
-        <button className="button" type="submit">
-          Submit Recipe
-        </button>
+        <div className="submit-main">
+          <button className="button" type="submit">
+            Submit recipe
+          </button>
+          <button className="button" onClick={handleBackToMainClick}>
+            Back to main page
+          </button>
+        </div>
       </form>
-      <button className="button" onClick={handleBackToMainClick}>
-        Back to Main Page
-      </button>
     </div>
   );
 }

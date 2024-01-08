@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
-
 const RecipeDetail = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
@@ -34,18 +33,23 @@ const RecipeDetail = () => {
       {recipe && (
         <div className="grid-container">
           <h1>{recipe.name}</h1>
+          {/* Add the following lines to display the picture */}
+          {recipe.picture && (
+            <div className="grid-item recipe-detail-picture">
+              <img src={recipe.picture} alt={recipe.name} className="recipe-image" />
+            </div>
+          )}
           <div className="grid-item recipe-detail-description">Description: {recipe.description}</div>
           <div className="grid-item recipe-detail-notes">Notes: {recipe.notes}</div>
           <div className="grid-item recipe-detail-ingredients">Ingredients: {recipe.ingredients}</div>
           <div className="grid-item recipe-detail-rating">Rating: {recipe.rating}</div>
           <div className="grid-item recipe-detail-difficulty">Difficulty: {recipe.difficulty}</div>
-          <div className="grid-item recipe-detail-prep-time">Prep Time: {recipe.prep_time} minutes</div>
-          <div className="grid-item recipe-detail-cook-time">Cook Time: {recipe.cook_time} minutes</div>
-          <div className="grid-item recipe-detail-portions">Number of Portions: {recipe.number_of_portions}</div>
-          {/* Add more details as needed */}
-          <div className="grid-item button-container">
+          <div className="grid-item recipe-detail-prep-time">Prep time: {recipe.prep_time} minutes</div>
+          <div className="grid-item recipe-detail-cook-time">Cook time: {recipe.cook_time} minutes</div>
+          <div className="grid-item recipe-detail-portions">Number of portions: {recipe.number_of_portions}</div>
+          <div className="submit-main">
             <button className="edit-button" onClick={handleEditClick}>Edit</button>
-            <button className="edit-button" onClick={handleBackClick}>Back to Main Page</button>
+            <button className="edit-button" onClick={handleBackClick}>Back to recipes</button>
           </div>
         </div>
       )}

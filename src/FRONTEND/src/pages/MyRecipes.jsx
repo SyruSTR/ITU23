@@ -162,28 +162,25 @@ return (
                 </div>
               </div>
             </Link>
-            <div className="recipe-actions">
-              <div onClick={(e) => e.stopPropagation()}>
+              <div className="recipe-actions" onClick={(e) => e.stopPropagation()}>
                 <button onClick={() => handleDeleteRecipe(recipe.id)}>
                   Delete
                 </button>
                 {userFavorites.includes(recipe.id) ? (
                   <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
-                    Remove from Favourites
+                    Remove from favorites
                   </button>
                 ) : (
                   <button onClick={() => handleToggleFavorite(recipe.id)}>
-                    Add to Favourites
+                    Add to favorites
                   </button>
                 )}
               </div>
-            </div>
           </li>
         ))}
       </ul>
       <div className="navigation-links">
-        <button onClick={handleBackToMainClick}>Back to Main Page</button>
-        <button onClick={handleCreateShoppingListClick}>Create a shopping list</button>
+        <button onClick={handleBackToMainClick}>Back to main page</button>
       </div>
 
       <ToastContainer />

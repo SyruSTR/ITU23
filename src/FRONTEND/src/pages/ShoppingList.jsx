@@ -4,92 +4,67 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
-
 const ShoppingList = () => {
-  const { recipeId } = useParams();
-  const [recipe, setRecipe] = useState(null);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const navigate = useNavigate();
+  const [shoppingList, setShoppingList] = useState([]);
 
   useEffect(() => {
-    // Fetch recipe details based on the recipeId
-    const fetchRecipe = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/api/recipes/${recipeId}`);
-        const data = await response.json();
-        setRecipe(data);
-      } catch (error) {
-        console.error('Error fetching recipe details:', error);
-      }
-    };
+    fetch('http://localhost:8000/api/shopping-list/')
+      .then(response => response.json())
+      .then(data => setShoppingList(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
-    fetchRecipe();
-  }, [recipeId]);
-
-  const handleIngredientToggle = (ingredientId) => {
-    setSelectedIngredients((prevIngredients) => {
-      if (prevIngredients.includes(ingredientId)) {
-        // Remove the ingredient if already selected
-        return prevIngredients.filter((id) => id !== ingredientId);
-      } else {
-        // Add the ingredient if not selected
-        return [...prevIngredients, ingredientId];
-      }
-    });
+  const handleRemoveIngredient = (itemId, ingredientIndex) => {
+    // Make a request to your API to remove the ingredient
+    fetch(`http://localhost:8000/api/remove-ingredient/${itemId}/${ingredientIndex}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          // If the API request is successful, update the state
+          const updatedShoppingList = shoppingList.map(item => {
+            if (item.id === itemId) {
+              const ingredients = item.ingredients.split(',');
+              ingredients.splice(ingredientIndex, 1);
+              item.ingredients = ingredients.join(',');
+            }
+            return item;
+          });
+          setShoppingList(updatedShoppingList);
+        } else {
+          console.error('Error removing ingredient:', response.statusText);
+        }
+      })
+      .catch(error => console.error('Error removing ingredient:', error));
   };
-
-  const handleCreateShoppingList = async () => {
-    try {
-      // Make a POST request to create a shopping list
-      const response = await fetch('http://localhost:8000/api/shopping-list/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          recipeId,
-          selectedIngredients,
-        }),
-      });
-
-      if (response.ok) {
-        console.log('Shopping list created successfully');
-        // Redirect to 'Your shopping lists' page after successful creation
-        navigate('/your-shopping-lists');
-      } else {
-        console.error('Failed to create shopping list');
-      }
-    } catch (error) {
-      console.error('Error creating shopping list:', error);
-    }
-  };
-
-  if (!recipe) {
-    return <p>Loading...</p>;
-  }
 
   return (
-    <div>
-      <Header />
-      <h1>Shopping List for {recipe.name}</h1>
+    <div className="App">
+      <h1>Shopping List</h1>
       <ul>
-        {recipe.ingredients.map((ingredient) => (
-          <li key={ingredient.id}>
-            <label>
-              <input
-                type="checkbox"
-                checked={selectedIngredients.includes(ingredient.id)}
-                onChange={() => handleIngredientToggle(ingredient.id)}
-              />
-              {ingredient.name}
-            </label>
+        {shoppingList.map(item => (
+          <li key={item.id}>
+            <strong>ID:</strong> {item.id} <br />
+            <strong>Ingredients:</strong>
+            <ul>
+              {item.ingredients.split(',').map((ingredient, index) => (
+                <li key={index}>
+                  {ingredient}{' '}
+                  <button onClick={() => handleRemoveIngredient(item.id, index)}>
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <strong>Created At:</strong> {item.created_at} <br />
           </li>
         ))}
       </ul>
-      <button onClick={handleCreateShoppingList}>Create Shopping List</button>
-      <Link to={`/myrecipes/recipe/${recipeId}`}>Back to Recipe</Link>
     </div>
   );
-};
+}
 
 export default ShoppingList;

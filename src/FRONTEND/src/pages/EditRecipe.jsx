@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import Rating from "../components/Rating";
 
 const EditRecipe = () => {
   const { recipeId } = useParams();
@@ -49,97 +50,145 @@ const EditRecipe = () => {
     navigate('/myrecipes');
   };
 
+  const handleFileInputChange = (e) => {
+    handleInputChange('picture', e.target.files[0]);
+  };
+
+  const handleBrowseClick = () => {
+    // Trigger the file input when the styled button is clicked
+    document.getElementById('fileInput').click();
+  };
+
+  const handleBackToMainClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="container">
       <Header /> {/* Include the Header component */}
       {editedRecipe && (
-        <>
-          <h1>Edit Recipe</h1>
-            <label htmlFor="editedName">Name</label>
+          <>
+            <h1>Edit Recipe</h1>
+            <label htmlFor="name">Name</label>
             <input
                 type="text"
-                id="editedName"
+                id="name"
                 name="name"
                 value={editedRecipe.name}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+                required
             />
 
-            <label htmlFor="editedDescription">Description</label>
+            <label htmlFor="description">Description</label>
             <input
                 type="text"
-                id="editedDescription"
+                id="description"
                 name="description"
                 value={editedRecipe.description}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('description', e.target.value)}
+                required
             />
 
-            <label htmlFor="editedNotes">Notes</label>
-            <input
-                type="text"
-                id="editedNotes"
+            <label htmlFor="notes">Notes</label>
+            <textarea
+                id="notes"
                 name="notes"
                 value={editedRecipe.notes}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('notes', e.target.value)}
             />
 
-            <label htmlFor="editedIngredients">Ingredients</label>
-            <input
-                type="text"
-                id="editedIngredients"
+            <label htmlFor="ingredients">Ingredients</label>
+            <textarea
+                id="ingredients"
                 name="ingredients"
                 value={editedRecipe.ingredients}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('ingredients', e.target.value)}
             />
 
-            <label htmlFor="editedRating">Rating</label>
-            <input
-                type="text"
-                id="editedRating"
-                name="rating"
-                value={editedRecipe.rating}
-                onChange={handleInputChange}
+            <label htmlFor="picture">Picture</label>
+            <div className="file-input-container">
+              <button
+                  type="button"
+                  className="file-input-button"
+                  onClick={handleBrowseClick}
+              >
+                Choose PNG image
+              </button>
+              <input
+                  type="file"
+                  id="fileInput"
+                  name="picture"
+                  onChange={handleFileInputChange}
+                  style={{display: 'none'}}
+              />
+            </div>
+
+            <label htmlFor="rating">Rating</label>
+            <Rating
+                rating={editedRecipe.rating}
+                onChange={(newRating) => handleInputChange('rating', newRating)}
             />
 
-            <label htmlFor="editedDifficulty">Difficulty</label>
-            <select
-                id="difficulty"
-                name="difficulty"
-                value={editedRecipe.difficulty}
-                onChange={handleInputChange}
-            >
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
+            <label htmlFor="difficulty">Difficulty</label>
+            <div className="difficulty-options">
+              <button
+                  type="button"
+                  className={`difficulty-button easy ${editedRecipe.difficulty === 'easy' ? 'selected' : ''}`}
+                  onClick={() => handleInputChange('difficulty', 'easy')}
+              >
+                Easy
+              </button>
 
-            <label htmlFor="editedPreptime">Prep time</label>
+              <button
+                  type="button"
+                  className={`difficulty-button medium ${editedRecipe.difficulty === 'medium' ? 'selected' : ''}`}
+                  onClick={() => handleInputChange('difficulty', 'medium')}
+              >
+                Medium
+              </button>
+
+              <button
+                  type="button"
+                  className={`difficulty-button hard ${editedRecipe.difficulty === 'hard' ? 'selected' : ''}`}
+                  onClick={() => handleInputChange('difficulty', 'hard')}
+              >
+                Hard
+              </button>
+            </div>
+
+            <label htmlFor="prep-time">Prep time (minutes)</label>
             <input
                 type="number"
-                id="editedPreptime"
+                id="prep-time"
                 name="prep_time"
                 value={editedRecipe.prep_time}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('prep_time', e.target.value)}
             />
 
-            <label htmlFor="editedCooktime">Cook time</label>
+            <label htmlFor="cook-time">Cook time (minutes)</label>
             <input
                 type="number"
-                id="editedCooktime"
+                id="cook-time"
                 name="cook_time"
                 value={editedRecipe.cook_time}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('cook_time', e.target.value)}
             />
 
-            <label htmlFor="editedPortions">Number of portions</label>
+            <label htmlFor="portions">Number of portions</label>
             <input
                 type="number"
-                id="editedPortions"
+                id="portions"
                 name="number_of_portions"
                 value={editedRecipe.number_of_portions}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange('number_of_portions', e.target.value)}
             />
-            <button onClick={handleSaveClick}>Save</button>
-            <button onClick={handleBackToMyRecipes}>Back to My Recipes</button>
+
+            <button className="button" type="submit" onClick={handleSaveClick}>
+              Save
+            </button>
+            <button className="button" onClick={handleBackToMainClick}>
+              Back to main page
+            </button>
           </>
       )}
     </div>

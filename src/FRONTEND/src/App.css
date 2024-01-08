@@ -1,11 +1,9 @@
-/* Reset Styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f2f2f2;
   margin-top: 30px;
 }
 
-/* Common Container Styles */
 .container,
 .profile-settings,
 .search-page,
@@ -28,7 +26,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Styles */
 h1 {
   font-size: 24px;
 }
@@ -39,17 +36,14 @@ h3 {
   margin: 0;
 }
 
-/* Label Styles */
 label {
   font-weight: bold;
   display: block;
   margin-top: 10px;
 }
 
-/* Input Styles */
 input[type="text"],
 input[type="number"],
-input[type="file"],
 select {
   width: 100%;
   padding: 12px 20px;
@@ -73,7 +67,6 @@ input[type="number"] {
   width: 20%;
 }
 
-/* Button Styles */
 input[type="submit"],
 .button,
 .settings-button,
@@ -87,17 +80,6 @@ input[type="submit"],
   cursor: pointer;
 }
 
-.input[type="submit"]:hover,
-.button:hover,
-.settings-button:hover,
-.edit-button:hover,
-.back-button:hover,
-.create-button:hover,
-.delete-button:hover {
-  background-color: #45a049;
-}
-
-/* Navigation Links Styles */
 .navigation-links {
   display: flex;
   justify-content: space-between;
@@ -115,14 +97,12 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Search Page Styles */
 .search-bar {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-/* Result/List Styles */
 .search-results,
 .recipe-list,
 .tag-list ul,
@@ -133,7 +113,6 @@ a:hover {
   padding: 0;
 }
 
-/* Item Styles */
 .search-result,
 .recipe-item,
 .tag-list li,
@@ -145,7 +124,6 @@ a:hover {
   background-color: #f9f9f9;
 }
 
-/* Tag List Styles */
 .tag-list li {
   padding: 5px 10px;
   margin: 5px;
@@ -159,7 +137,6 @@ a:hover {
   background-color: #0056b3;
 }
 
-/* Recipe/Meal Item Styles */
 .recipe-item,
 .meal-item {
   border: 1px solid #ccc;
@@ -169,14 +146,12 @@ a:hover {
   background-color: #f9f9f9;
 }
 
-/* Recipe Detail Styles */
 .recipe-details,
 .meal-details-container .button-container {
   display: flex;
   gap: 10px;
 }
 
-/* Delete/Edit Button Styles */
 .delete-button,
 .edit-button,
 .edit-recipe-button {
@@ -195,7 +170,6 @@ a:hover {
   background-color: #0056b3;
 }
 
-/* Back Link Styles */
 .back-link,
 .back-button {
   display: inline-block;
@@ -212,7 +186,6 @@ a:hover {
   background-color: #eee;
 }
 
-/* Meal Planner Form Styles */
 .meal-planner-form,
 .meal-planner-container .button-container {
   margin-top: 20px;
@@ -222,12 +195,10 @@ a:hover {
   font-size: 20px;
 }
 
-/* Checkbox Styles */
 .meal-planner-form input[type="checkbox"] {
   margin-right: 5px;
 }
 
-/* List Styles */
 .meal-planner-form ul,
 .recipe-list,
 .meal-list {
@@ -239,7 +210,6 @@ a:hover {
   margin-bottom: 10px;
 }
 
-/* Create/Back Button Styles */
 .create-button,
 .back-button {
   background-color: #007bff;
@@ -254,32 +224,27 @@ a:hover {
   background-color: #0056b3;
 }
 
-/* My Meals Container Styles */
 .my-meals-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Meal List Styles */
 .meal-list {
   list-style: none;
   padding: 0;
 }
 
-/* Meal Link Styles */
 .meal-link {
   text-decoration: none;
   color: #007BFF;
 }
 
-/* Meal Title Styles */
 .meal-title {
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-/* Meal Date/Type/Recipes Styles */
 .meal-date,
 .meal-type,
 .meal-recipes {
@@ -287,7 +252,6 @@ a:hover {
   margin-bottom: 5px;
 }
 
-/* Meal Details Container Styles */
 .meal-details-container,
 .meal-planner-container {
   max-width: 800px;
@@ -295,26 +259,22 @@ a:hover {
   padding: 20px;
 }
 
-/* Meal Planner Container Styles */
 .meal-planner-container {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Meal Planner Form Styles */
 .meal-planner-form {
   margin-top: 20px;
 }
 
-/* Meal Planner Form Label Styles */
 .meal-planner-form label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
 
-/* Meal Planner Form Select Styles */
 .meal-planner-form select {
   width: auto;
   padding: 10px;
@@ -325,12 +285,10 @@ a:hover {
   box-sizing: border-box;
 }
 
-/* Meal Planner Form Button Container Styles */
 .meal-planner-form .button-container {
   margin-top: 20px;
 }
 
-/* Meal Planner Form Create Button Styles */
 .meal-planner-form .create-button {
   width: 100%;
   background-color: #04AA6D;
@@ -354,7 +312,6 @@ a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Favorite Heading Styles */
 .favorite-heading {
   color: #333;
 }
@@ -373,21 +330,20 @@ a:hover {
 .back-to-menu-button {
   display: block;
   margin-top: 10px;
-  padding: 10px 20px; /* Adjust padding as needed */
-  background-color: #3498db; /* Change to your preferred button color */
-  color: #ffffff; /* Change to your preferred text color */
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
-  font-size: 16px; /* Adjust as needed */
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+  transition: background-color 0.3s ease;
 }
 
 .back-to-menu-button:hover {
-  background-color: #2078b5; /* Change to your preferred hover color */
+  background-color: #2078b5;
 }
 
-/* MyRecipes.css */
 .my-recipes-container {
   max-width: 800px;
   margin: 0 auto;
@@ -395,8 +351,8 @@ a:hover {
 }
 
 .recipe-item {
-  display: flex; /* Use flexbox to align items in a row */
-  justify-content: space-between; /* Space between items, pushing the buttons to the right */
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
   border: 1px solid #ddd;
   padding: 10px;
@@ -406,11 +362,6 @@ a:hover {
 .recipe-actions {
   display: flex;
   align-items: center;
-}
-
-.recipe-actions button {
-  margin-right: 10px;
-  width: auto;
 }
 
 .recipe-link {
@@ -423,15 +374,77 @@ a:hover {
 }
 
 .recipe-image {
-  width: 100px; /* Adjust the width as needed */
-  height: 100px; /* Set the height equal to the width to maintain a square */
-  object-fit: cover; /* Ensure the image covers the square */
-  margin-right: 20px; /* Adjust the margin as needed */
-  border-radius: 5px; /* Add border-radius for smooth corners */
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 5px;
   margin-top: 10px;
   margin-left: 10px;
 }
 
 .recipe-name {
   margin-top: 30px;
+}
+
+.difficulty-options {
+  display: flex;
+}
+
+.difficulty-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin: 5px;
+}
+
+.difficulty-button.easy {
+  background-color: #28a745;
+  color: #fff;
+  border: 2px solid transparent;
+}
+
+.difficulty-button.medium {
+  background-color: #ffc107;
+  color: #fff;
+  border: 3px solid transparent;
+}
+
+.difficulty-button.hard {
+  background-color: #dc3545;
+  color: #fff;
+  border: 3px solid transparent;
+}
+
+.difficulty-button.selected {
+  border: 3px solid #007bff;
+}
+
+#notes,
+#ingredients {
+  width: 99%;
+  min-height: 100px;
+  resize: vertical;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.file-input-button {
+  font-size: 16px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.submit-main {
+  display: flex;
+}
+
+.button[type="submit"] {
+  margin-right: 10px;
 }
