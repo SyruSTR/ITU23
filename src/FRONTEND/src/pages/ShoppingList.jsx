@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:8000/api/shopping-list/')
@@ -11,13 +13,11 @@ const ShoppingList = () => {
   }, []);
 
   const handleDelete = (id) => {
-    // Make a DELETE request to the API to delete the ingredient
     fetch(`http://localhost:8000/api/shopping-list/${id}/`, {
       method: 'DELETE',
     })
       .then(response => {
         if (response.ok) {
-          // Update the state to reflect the deleted ingredient
           setIngredients(prevIngredients =>
             prevIngredients.filter(ingredient => ingredient.id !== id)
           );
@@ -28,17 +28,28 @@ const ShoppingList = () => {
       .catch(error => console.error('Error deleting ingredient:', error));
   };
 
+  const handleBackToMainMenu = () => {
+    navigate("/");
+  };
+
   return (
-    <div>
+    <div className="shopping-list-container">
       <h1>Shopping List</h1>
-      <ul>
-        {ingredients.map(ingredient => (
-          <li key={ingredient.id}>
-            {ingredient.ingredient}
-            <button onClick={() => handleDelete(ingredient.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      {ingredients.length === 0 ? (
+        <p>No ingredients in the shopping list.</p>
+      ) : (
+        <>
+          <ul>
+            {ingredients.map(ingredient => (
+              <li key={ingredient.id}>
+                <span>{ingredient.ingredient}</span>
+                <button onClick={() => handleDelete(ingredient.id)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+          <button onClick={handleBackToMainMenu}>Back to Main Menu</button>
+        </>
+      )}
     </div>
   );
 };

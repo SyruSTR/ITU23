@@ -457,3 +457,38 @@ a:hover {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.shopping-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-list-container h1 {
+  color: #333;
+}
+
+.shopping-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.shopping-list-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.shopping-list-container p {
+  color: #555;
+}
+
+/* Optional: Add some spacing around the container */
+.shopping-list-container {
+  margin-top: 20px;
+}
