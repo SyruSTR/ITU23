@@ -58,7 +58,7 @@ button {
   padding: 12px 20px;
   margin: 8px 0;
   display: block;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -68,16 +68,23 @@ input[type="number"] {
 }
 
 input[type="submit"],
-.button,
 .settings-button,
-.edit-button,
 .back-button,
 .create-button,
 .delete-button {
   padding: 14px 20px;
   border: none;
+}
+
+.edit-button {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: none;
   border-radius: 4px;
-  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #007bff;
+  color: white;
 }
 
 .navigation-links {
@@ -163,7 +170,6 @@ a:hover {
 }
 
 .delete-button,
-.edit-button,
 .edit-recipe-button {
   background-color: #007bff;
   color: #fff;
@@ -372,6 +378,10 @@ a:hover {
 .recipe-actions {
   display: flex;
   align-items: center;
+}
+
+.recipe-actions button {
+  margin-right: 10px;
 }
 
 .recipe-link {

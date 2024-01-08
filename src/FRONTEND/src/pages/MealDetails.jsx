@@ -51,7 +51,6 @@ const MealDetails = () => {
   };
 
   const handleUpdateMealPlanner = () => {
-    // Redirect to the update-meal page
     navigate(`/meal-planner/my-meals/meal-details/${id}/edit-meal/${id}`);
   };
 
@@ -64,14 +63,11 @@ const MealDetails = () => {
   };
 
   return (
-    <div>
-
       <div className="meal-details-container">
         <Header /> {/* Include the Header component */}
         <h1>Meal Details</h1>
         <p className="detail-text">Date: {mealPlanner.date}</p>
         <p className="detail-text">Meal Type: {mealPlanner.meal_type}</p>
-        {/* Display other details as needed */}
         <p className="detail-text">Recipes:</p>
         <ul className="recipe-list">
           {mealPlanner.recipes.map((recipeId) => (
@@ -80,19 +76,15 @@ const MealDetails = () => {
             </li>
           ))}
         </ul>
-        <button className="delete-button" onClick={handleDeleteMealPlanner}>
-          Delete meal plan
-        </button>
-        <button className="edit-button" onClick={handleUpdateMealPlanner}>
-          Edit meal plan
-        </button>
-        <div className="button-container">
+        <div className="recipe-actions">
+          <button className="edit-button" onClick={handleUpdateMealPlanner}>
+            Edit meal plan
+          </button>
           <button className="button" onClick={handleBackToMeals}>
             Back to your meals
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

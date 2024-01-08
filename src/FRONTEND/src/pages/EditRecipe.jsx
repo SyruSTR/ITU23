@@ -183,12 +183,14 @@ const EditRecipe = () => {
                 onChange={(e) => handleInputChange('number_of_portions', e.target.value)}
             />
 
-            <button className="button" type="submit" onClick={handleSaveClick}>
-              Save
-            </button>
-            <button className="button" onClick={handleBackToMainClick}>
-              Back to main page
-            </button>
+            <div className="recipe-actions">
+              <button className="edit-button" type="submit" onClick={handleSaveClick}>
+                Save
+              </button>
+              <button className="button" onClick={handleBackToMainClick}>
+                Back to main page
+              </button>
+            </div>
           </>
       )}
     </div>

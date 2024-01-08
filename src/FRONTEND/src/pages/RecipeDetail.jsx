@@ -25,7 +25,7 @@ const RecipeDetail = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/myrecipes');
   };
 
   return (
@@ -48,8 +48,8 @@ const RecipeDetail = () => {
           <div className="grid-item recipe-detail-prep-time">Prep time: {recipe.prep_time} minutes</div>
           <div className="grid-item recipe-detail-cook-time">Cook time: {recipe.cook_time} minutes</div>
           <div className="grid-item recipe-detail-portions">Number of portions: {recipe.number_of_portions}</div>
-          <div className="submit-main">
-            <button className="button" onClick={handleEditClick}>Edit</button>
+          <div className="recipe-actions">
+            <button className="edit-button" onClick={handleEditClick}>Edit</button>
             <button className="button" onClick={handleBackClick}>Back to recipes</button>
           </div>
         </div>
