@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Header from '../components/Header';
+import {toast} from "react-toastify";
 
 
 function Search() {
@@ -10,25 +11,32 @@ function Search() {
   const [allRecipes, setAllRecipes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+  const [apiUrl] = useState('http://localhost:8000/api/add-recipes/');
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+
 
   useEffect(() => {
-    const fetchAllRecipes = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/add-recipes/');
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch recipes');
-        }
-
-        const recipes = await response.json();
-        setAllRecipes(recipes);
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-      }
-    };
-
-    fetchAllRecipes();
-  }, []);
+    // Fetch all recipes
+    fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setAllRecipes(data);
+          } else {
+            console.error('API response is not an array:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+  }, [apiUrl]);
 
   const handleSearch = () => {
     const results = allRecipes.filter((recipe) =>
@@ -41,6 +49,105 @@ function Search() {
     navigate('/');
   };
 
+  const handleDeleteRecipe = async (recipeId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/add-recipes/${recipeId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        console.error('Failed to delete recipe');
+        return;
+      }
+
+      // Update the state using the callback function to ensure you are working with the latest state
+      setAllRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== recipeId));
+    } catch (error) {
+      console.error('Error while deleting recipe', error);
+    }
+  };
+
+
+  const handleToggleFavorite = async (recipeId) => {
+  try {
+    const url = `http://localhost:8000/api/add-recipes/${recipeId}/`;
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ is_favourite: true }), // Set is_favourite to true
+    });
+
+    if (!response.ok) {
+      console.error('Failed to add recipe to favorites');
+      return;
+    }
+
+    // Update the state to reflect the changes
+    const updatedRecipes = allRecipes.map((recipe) => {
+      if (recipe.id === recipeId) {
+        return { ...recipe, is_favourite: true };
+      }
+      return recipe;
+    });
+
+    setAllRecipes(updatedRecipes);
+
+    // Show success message
+    toast.success('Recipe added to favorites!', { autoClose: 2000 });
+  } catch (error) {
+    console.error('Error while adding recipe to favorites', error);
+
+    // Show error message
+    toast.error('Failed to add recipe to favorites');
+  }
+};
+
+  const handleRemoveFromFavorites = async (recipeId) => {
+  try {
+    const url = `http://127.0.0.1:8000/api/add-recipes/${recipeId}/`;
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ is_favourite: false }),
+    });
+
+    if (!response.ok) {
+      console.error('Failed to remove recipe from favorites');
+      return;
+    }
+
+    // Update the state to reflect the changes in both recipes and favoriteRecipes
+    const updatedRecipes = allRecipes.map((recipe) => {
+      if (recipe.id === recipeId) {
+        return { ...recipe, is_favourite: false };
+      }
+      return recipe;
+    });
+
+    const updatedFavoriteRecipes = favoriteRecipes.filter(
+      (recipe) => recipe.id !== recipeId
+    );
+
+    setAllRecipes(updatedRecipes);
+    setFavoriteRecipes(updatedFavoriteRecipes);
+
+    // Show success message
+    toast.success('Recipe removed from favorites!', { autoClose: 2000 });
+  } catch (error) {
+    console.error('Error while removing recipe from favorites', error);
+
+    // Show error message
+    toast.error('Failed to remove recipe from favorites');
+  }
+};
+
   return (
     <div className="search-page">
       <Header />
@@ -52,22 +159,40 @@ function Search() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-button" onClick={handleSearch}>Search</button>
       </div>
       {searchResults.length > 0 ? (
-        <ul className="search-results">
-          {searchResults.map((recipe) => (
-            <li className="search-result" key={recipe.id}>
-              <h2>{recipe.name}</h2>
-              <p>{recipe.description}</p>
-              {/* Additional information can be displayed as needed */}
-              <p>Difficulty: {recipe.difficulty}</p>
-              <p>Rating: {recipe.rating}</p>
-            </li>
-          ))}
-        </ul>
+          <ul className="recipe-list">
+            {searchResults.map((recipe) => (
+                <li className="recipe-item" key={recipe.id}>
+                  <Link to={`/recipe/${recipe.id}`} className="recipe-link">
+                    <div className="recipe-details">
+                      {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image"/>}
+                      <div className="text-details">
+                        <h2 className="recipe-name">{recipe.name}</h2>
+                        <p className="recipe-description">{recipe.description}</p>
+                      </div>
+                    </div>
+                  </Link>
+                  <div className="recipe-actions" onClick={(e) => e.stopPropagation()}>
+                    <button onClick={() => handleDeleteRecipe(recipe.id)}>
+                      Delete
+                    </button>
+                    {recipe.is_favourite ? (
+                        <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
+                          Remove from favorites
+                        </button>
+                    ) : (
+                        <button onClick={() => handleToggleFavorite(recipe.id)}>
+                          Add to favorites
+                        </button>
+                    )}
+                  </div>
+                </li>
+            ))}
+          </ul>
       ) : (
-        <p>No results found.</p>
+          <p>No results found</p>
       )}
       <div className="navigation-links">
         <button onClick={handleBackToMainClick}>Back to main page</button>
