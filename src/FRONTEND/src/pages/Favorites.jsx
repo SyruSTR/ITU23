@@ -1,58 +1,36 @@
-// Authors: Murad Mikogaziev
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 
-function MyRecipes() {
-  const [recipes, setRecipes] = useState([]);
-  const [userFavorites, setUserFavorites] = useState([]);
-  const apiUrl = 'http://localhost:8000/api/add-recipes/';
-  const favoritesApiUrl = 'http://localhost:8000/api/favourite-recipe/';
+function Favorites() {
   const navigate = useNavigate();
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [apiUrl, setApiUrl] = useState('http://localhost:8000/api/add-recipes/');
+
 
   useEffect(() => {
-    // Fetch user's favorite recipes
-    fetch(favoritesApiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setUserFavorites(data.map((favorite) => favorite.recipe));
-      })
-      .catch((error) => {
-        console.error('Error fetching user favorites:', error);
-      });
-
-    // Fetch all recipes
+    // Fetch recipes from the API
     fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+      .then(response => response.json())
+      .then(data => {
+        // Filter recipes with is_favorite set to true
+        const favorites = data.filter(recipe => recipe.is_favourite);
+        setFavoriteRecipes(favorites);
       })
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setRecipes(data);
-        } else {
-          console.error('API response is not an array:', data);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [apiUrl, favoritesApiUrl]);
+      .catch(error => console.error('Error fetching data:', error));
+  }, [apiUrl]);
 
-  const handleRemoveFromFavorites = async (favoriteId) => {
+  const handleRemoveFromFavorites = async (recipeId) => {
     try {
-      const url = `${favoritesApiUrl}${favoriteId}/`;
-
+      const url = `http://127.0.0.1:8000/api/add-recipes/${recipeId}/`;
       const response = await fetch(url, {
-        method: 'DELETE',
+        method: 'PATCH', // or 'PUT' depending on your API
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ is_favourite: false }),
       });
 
       if (!response.ok) {
@@ -60,9 +38,9 @@ function MyRecipes() {
         return;
       }
 
-      // Filter out the removed favorite by id
-      const updatedUserFavorites = userFavorites.filter((favorite) => favorite.id !== favoriteId);
-      setUserFavorites(updatedUserFavorites);
+      // Update the state to reflect the changes
+      const updatedFavoriteRecipes = favoriteRecipes.filter(recipe => recipe.id !== recipeId);
+      setFavoriteRecipes(updatedFavoriteRecipes);
 
       // Show success message
       toast.success('Recipe removed from favorites!', { autoClose: 2000 });
@@ -78,25 +56,25 @@ function MyRecipes() {
     navigate('/');
   };
 
-
   return (
     <div className="my-recipes">
-      <Header /> {/* Include the Header component */}
-      <h1>Favorite recipes</h1>
+      <Header />
+      <h1>My Recipes</h1>
       <ul className="recipe-list">
-        {recipes.map((recipe) => (
+        {favoriteRecipes.map((recipe) => (
           <li className="recipe-item" key={recipe.id}>
             <Link to={`/recipe/${recipe.id}`} className="recipe-link">
               <div className="recipe-details">
-                <h2>{recipe.name}</h2>
-                <p>{recipe.description}</p>
+                {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image" />}
+                <div className="text-details">
+                  <h2 className="recipe-name">{recipe.name}</h2>
+                  <p className="recipe-description">{recipe.description}</p>
+                </div>
               </div>
             </Link>
-            <div className="recipe-actions">
-              <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
-                Remove from Favorites
-              </button>
-            </div>
+            <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
+              Remove from favorites
+            </button>
           </li>
         ))}
       </ul>
@@ -104,10 +82,9 @@ function MyRecipes() {
         <button onClick={handleBackToMainClick}>Back to Main Page</button>
       </div>
 
-      {/* Toastify container for notifications */}
       <ToastContainer />
     </div>
   );
 }
 
-export default MyRecipes;
+export default Favorites;

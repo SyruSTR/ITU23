@@ -9,22 +9,12 @@ import Header from '../components/Header';
 
 
 function MyRecipes() {
-  const [recipes, setRecipes] = useState([]);
-  const [userFavorites, setUserFavorites] = useState([]);
-  const apiUrl = 'http://localhost:8000/api/add-recipes/';
-  const favoritesApiUrl = 'http://localhost:8000/api/favourite-recipe/';
-  const navigate = useNavigate();
+    const [recipes, setRecipes] = useState([]);
+    const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+    const [apiUrl, setApiUrl] = useState('http://localhost:8000/api/add-recipes/'); // Use state for apiUrl
+    const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user's favorite recipes
-    fetch(favoritesApiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          setUserFavorites(data.map((favorite) => favorite.recipe));
-        })
-        .catch((error) => {
-          console.error('Error fetching user favorites:', error);
-        });
 
     // Fetch all recipes
     fetch(apiUrl)
@@ -44,7 +34,7 @@ function MyRecipes() {
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
-  }, [apiUrl, favoritesApiUrl]);
+  }, [apiUrl]);
 
   const handleDeleteRecipe = async (recipeId) => {
     try {
@@ -67,65 +57,73 @@ function MyRecipes() {
     }
   };
 
-  const handleToggleFavorite = async (recipeId) => {
-    try {
-      const url = favoritesApiUrl;
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({recipe: recipeId}),
-      });
-
-      if (!response.ok) {
-        console.error('Failed to add recipe to favorites');
-        return;
-      }
-
-      // Fetch updated user favorites after adding to favorites
-      const updatedResponse = await fetch(favoritesApiUrl);
-      const updatedData = await updatedResponse.json();
-
-      setUserFavorites(updatedData.map((favorite) => favorite.recipe));
-
-      // Show success message
-      toast.success('Recipe added to favorites!', {autoClose: 2000});
-    } catch (error) {
-      console.error('Error while adding recipe to favorites', error);
-
-      // Show error message
-      toast.error('Failed to add recipe to favorites');
-    }
-  };
-
-  const handleRemoveFromFavorites = async (favoriteId) => {
+const handleToggleFavorite = async (recipeId) => {
   try {
-    const url = `${favoritesApiUrl}${favoriteId}/`;
-
-    console.log('Delete URL:', url); // Log the delete URL
-
+    const url = `http://localhost:8000/api/add-recipes/${recipeId}/`;
     const response = await fetch(url, {
-      method: 'DELETE',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ is_favourite: true }), // Set is_favourite to true
     });
 
-    console.log('Delete Response:', response); // Log the delete response
+    if (!response.ok) {
+      console.error('Failed to add recipe to favorites');
+      return;
+    }
+
+    // Update the state to reflect the changes
+    const updatedRecipes = recipes.map((recipe) => {
+      if (recipe.id === recipeId) {
+        return { ...recipe, is_favourite: true };
+      }
+      return recipe;
+    });
+
+    setRecipes(updatedRecipes);
+
+    // Show success message
+    toast.success('Recipe added to favorites!', { autoClose: 2000 });
+  } catch (error) {
+    console.error('Error while adding recipe to favorites', error);
+
+    // Show error message
+    toast.error('Failed to add recipe to favorites');
+  }
+};
+
+
+  const handleRemoveFromFavorites = async (recipeId) => {
+  try {
+    const url = `http://127.0.0.1:8000/api/add-recipes/${recipeId}/`;
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ is_favourite: false }),
+    });
 
     if (!response.ok) {
       console.error('Failed to remove recipe from favorites');
       return;
     }
 
-    // Filter out the removed favorite by id
-    const updatedUserFavorites = userFavorites.filter((favorite) => favorite.id !== favoriteId);
+    // Update the state to reflect the changes in both recipes and favoriteRecipes
+    const updatedRecipes = recipes.map((recipe) => {
+      if (recipe.id === recipeId) {
+        return { ...recipe, is_favourite: false };
+      }
+      return recipe;
+    });
 
-    console.log('Updated User Favorites:', updatedUserFavorites); // Log the updated userFavorites
+    const updatedFavoriteRecipes = favoriteRecipes.filter(
+      (recipe) => recipe.id !== recipeId
+    );
 
-    setUserFavorites(updatedUserFavorites);
+    setRecipes(updatedRecipes);
+    setFavoriteRecipes(updatedFavoriteRecipes);
 
     // Show success message
     toast.success('Recipe removed from favorites!', { autoClose: 2000 });
@@ -138,16 +136,13 @@ function MyRecipes() {
 };
 
 
+
   const handleBackToMainClick = () => {
     navigate('/');
   };
 
   const handleSearch = () => {
     navigate('/myrecipes/search');
-  };
-
-  const handleCreateShoppingListClick = () => {
-    navigate('/myrecipes/shopping-list');
   };
 
 return (
@@ -170,7 +165,7 @@ return (
                 <button onClick={() => handleDeleteRecipe(recipe.id)}>
                   Delete
                 </button>
-                {userFavorites.includes(recipe.id) ? (
+                {recipe.is_favourite ? (
                   <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
                     Remove from favorites
                   </button>
