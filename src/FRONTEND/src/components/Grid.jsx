@@ -36,39 +36,27 @@ export default function Grid() {
     navigate('/meal-planner');
   };
 
-  const navigateMyMeals = () => {
-    navigate('/my-meals');
-  };
+    const navigateMyMeals = () => {
+        navigate("/my-meals")
+    }
+
+    const navigateAddShoppingList = () => {
+        navigate("/add-shopping-list")
+    }
+
+
 
   return (
-    <div>
-      <div className="grid-container">
-      <Header /> {/* Include the Header component */}
-        <button className="grid-button" onClick={navigateAddRecipe}>
-          Add recipe
-        </button>
-        <button className="grid-button" onClick={navigateMyRecipes}>
-          My recipes
-        </button>
-        <button className="grid-button" onClick={navigateSearch}>
-          Search
-        </button>
-        <button className="grid-button" onClick={navigateTags}>
-          Tags
-        </button>
-        <button className="grid-button" onClick={navigateFavorites}>
-          Favorites
-        </button>
-        <button className="grid-button" onClick={navigateSettings}>
-          Settings
-        </button>
-        <button className="grid-button" onClick={navigateMealPlanner}>
-          Meal planner
-        </button>
-        <button className="grid-button" onClick={navigateMyMeals}>
-          My meals
-        </button>
-      </div>
+    <div className="grid-container">
+      <button className={"grid-button"} onClick={navigateAddRecipe}>Add recipe</button>
+      <button className={"grid-button"} onClick={navigateMyRecipes}>My recipes</button>
+      <button className={"grid-button"} onClick={navigateSearch}>Search</button>
+      <button className={"grid-button"} onClick={navigateTags}>Tags</button>
+      <button className={"grid-button"} onClick={navigateFavorites}>Favorites</button>
+      <button className={"grid-button"} onClick={navigateSettings}>Settings</button>
+      <button className={"grid-button"} onClick={navigateMealPlanner}>Meal planner</button>
+      <button className={"grid-button"} onClick={navigateMyMeals}>My meals</button>
+      <button className={"grid-button"} onClick={navigateAddShoppingList}>My shopping lists</button>
     </div>
-  );
+  )
 }

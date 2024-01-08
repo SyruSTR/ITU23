@@ -78,14 +78,14 @@ const MealPlanner = () => {
       <Header />
       <h1>Meal Planner</h1>
       <div className="meal-planner-form">
-        <h2>Create New Meal Planner</h2>
+        <h2>Create a new meal for the day</h2>
         <label>Date:</label>
         <input
           type="date"
           value={newMealPlanner.date}
           onChange={(e) => setNewMealPlanner({ ...newMealPlanner, date: e.target.value })}
         />
-        <label>Meal Type:</label>
+        <label>Meal type:</label>
         <select
           value={newMealPlanner.meal_type}
           onChange={(e) => setNewMealPlanner({ ...newMealPlanner, meal_type: e.target.value })}

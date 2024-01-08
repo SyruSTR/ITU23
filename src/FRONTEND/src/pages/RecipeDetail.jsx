@@ -1,5 +1,3 @@
-//Authors: Murad Mikogaziev
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -28,6 +26,13 @@ const RecipeDetail = () => {
     navigate('/');
   };
 
+  const handleAddShoppingListClick = () => {
+
+    console.log("Creating shopping list for recipe:", recipe);
+
+    navigate(`/myrecipes/recipe/${recipeId}/add-shopping-list`);
+  };
+
   return (
     <div className="recipe-detail-container">
       <Header />
@@ -42,10 +47,10 @@ const RecipeDetail = () => {
           <div className="grid-item recipe-detail-prep-time">Prep Time: {recipe.prep_time} minutes</div>
           <div className="grid-item recipe-detail-cook-time">Cook Time: {recipe.cook_time} minutes</div>
           <div className="grid-item recipe-detail-portions">Number of Portions: {recipe.number_of_portions}</div>
-          {/* Add more details as needed */}
           <div className="grid-item button-container">
             <button className="edit-button" onClick={handleEditClick}>Edit</button>
             <button className="edit-button" onClick={handleBackClick}>Back to Main Page</button>
+            <button className="edit-button" onClick={handleAddShoppingListClick}>Add a shopping list</button>
           </div>
         </div>
       )}
