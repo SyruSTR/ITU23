@@ -59,6 +59,10 @@ const MealDetails = () => {
     return <p>Loading...</p>;
   }
 
+  const handleBackToMeals = () => {
+    navigate("/meal-planner/my-meals")
+  };
+
   return (
     <div>
 
@@ -82,9 +86,11 @@ const MealDetails = () => {
         <button className="edit-button" onClick={handleUpdateMealPlanner}>
           Edit meal plan
         </button>
-        <Link to='/meal-planner/my-meals'>
-          <button className="back-to-menu-button">Back to your meals</button>
-        </Link>
+        <div className="button-container">
+          <button className="button" onClick={handleBackToMeals}>
+            Back to your meals
+          </button>
+        </div>
       </div>
     </div>
   );

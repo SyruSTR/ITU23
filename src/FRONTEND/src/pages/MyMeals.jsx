@@ -3,10 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const MyMeals = () => {
   const [mealPlanners, setMealPlanners] = useState([]);
   const [recipes, setRecipes] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +32,10 @@ const MyMeals = () => {
   const getRecipeNameById = (recipeId) => {
     const recipe = recipes.find((r) => r.id === recipeId);
     return recipe ? recipe.name : 'Recipe not found';
+  };
+
+  const handleBackToMainClick = () => {
+    navigate('/');
   };
 
   return (
@@ -54,9 +61,11 @@ const MyMeals = () => {
           </li>
         ))}
       </ul>
-      <Link to="/" className="back-link">
-        Back to Main Page
-      </Link>
+      <div className="button-container">
+        <button className="button" onClick={handleBackToMainClick}>
+            Back to main page
+          </button>
+      </div>
     </div>
   );
 };

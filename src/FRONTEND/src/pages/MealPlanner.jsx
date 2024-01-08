@@ -1,5 +1,4 @@
-//Authors: Oleg Borshch, Nikita Vetluzhskikh
-
+// Authors: Oleg Borshch, Nikita Vetluzhskikh
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -44,6 +43,10 @@ const MealPlanner = () => {
     }
   };
 
+  const handleMealTypeChange = (type) => {
+    setNewMealPlanner({ ...newMealPlanner, meal_type: type });
+  };
+
   const handleCreateMealPlanner = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/meal-planner/', {
@@ -73,6 +76,10 @@ const MealPlanner = () => {
     }
   };
 
+  const handleBackToMainClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="meal-planner-container">
       <Header />
@@ -85,14 +92,31 @@ const MealPlanner = () => {
           onChange={(e) => setNewMealPlanner({ ...newMealPlanner, date: e.target.value })}
         />
         <label>Meal type:</label>
-        <select
-          value={newMealPlanner.meal_type}
-          onChange={(e) => setNewMealPlanner({ ...newMealPlanner, meal_type: e.target.value })}
-        >
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
+        <div className="meal-type-options" style={{ display: 'flex', gap: '10px' }}>
+          <button
+            type="button"
+            className={`meal-type-button breakfast ${newMealPlanner.meal_type === 'breakfast' ? 'selected' : ''}`}
+            onClick={() => handleMealTypeChange('breakfast')}
+          >
+            Breakfast
+          </button>
+
+          <button
+            type="button"
+            className={`meal-type-button lunch ${newMealPlanner.meal_type === 'lunch' ? 'selected' : ''}`}
+            onClick={() => handleMealTypeChange('lunch')}
+          >
+            Lunch
+          </button>
+
+          <button
+            type="button"
+            className={`meal-type-button dinner ${newMealPlanner.meal_type === 'dinner' ? 'selected' : ''}`}
+            onClick={() => handleMealTypeChange('dinner')}
+          >
+            Dinner
+          </button>
+        </div>
         <label>Recipes:</label>
         <ul>
           {recipes.map((recipe) => (
@@ -120,7 +144,7 @@ const MealPlanner = () => {
         </div>
       </div>
       <div className="button-container">
-        <button className="back-button" onClick={() => navigate('/')}>
+        <button className="button" onClick={() => navigate('/')}>
           Back to Main Menu
         </button>
       </div>
