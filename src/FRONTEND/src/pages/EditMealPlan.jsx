@@ -1,6 +1,6 @@
-//Authors: Nikita Vetluzhskikh
+// Authors: Nikita Vetluzhskikh
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
 const EditMealPlan = () => {
@@ -62,6 +62,10 @@ const EditMealPlan = () => {
     });
   };
 
+  const handleMealTypeChange = (type) => {
+    setFormData({ ...formData, meal_type: type });
+  };
+
   const handleUpdateMealPlanner = async () => {
     try {
       // Convert recipe IDs to numbers before sending the request
@@ -100,17 +104,37 @@ const EditMealPlan = () => {
 
   return (
     <div className="container">
-      <Header /> {/* Include the Header component */}
+      <Header />
       <h1>Edit Meal Plan</h1>
       <label htmlFor="date">Date:</label>
       <input type="date" id="date" name="date" value={formData.date} onChange={handleInputChange} />
 
-      <label htmlFor="mealType">Meal Type:</label>
-      <select id="mealType" name="meal_type" value={formData.meal_type} onChange={handleInputChange}>
-        <option value="breakfast">Breakfast</option>
-        <option value="lunch">Lunch</option>
-        <option value="dinner">Dinner</option>
-      </select>
+      <label>Meal Type:</label>
+      <div className="meal-type-options" style={{ display: 'flex', gap: '10px' }}>
+        <button
+          type="button"
+          className={`meal-type-button breakfast ${formData.meal_type === 'breakfast' ? 'selected' : ''}`}
+          onClick={() => handleMealTypeChange('breakfast')}
+        >
+          Breakfast
+        </button>
+
+        <button
+          type="button"
+          className={`meal-type-button lunch ${formData.meal_type === 'lunch' ? 'selected' : ''}`}
+          onClick={() => handleMealTypeChange('lunch')}
+        >
+          Lunch
+        </button>
+
+        <button
+          type="button"
+          className={`meal-type-button dinner ${formData.meal_type === 'dinner' ? 'selected' : ''}`}
+          onClick={() => handleMealTypeChange('dinner')}
+        >
+          Dinner
+        </button>
+      </div>
 
       <label htmlFor="recipes">Recipes:</label>
       <ul>

@@ -24,7 +24,7 @@ function Favorites() {
     try {
       const url = `http://127.0.0.1:8000/api/add-recipes/${recipeId}/`;
       const response = await fetch(url, {
-        method: 'PATCH', // or 'PUT' depending on your API
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
