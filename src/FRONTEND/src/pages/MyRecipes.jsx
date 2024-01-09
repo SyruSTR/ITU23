@@ -162,15 +162,15 @@ return (
               </div>
             </Link>
               <div className="recipe-actions" onClick={(e) => e.stopPropagation()}>
-                <button className="button" onClick={() => handleDeleteRecipe(recipe.id)}>
+                <button  onClick={() => handleDeleteRecipe(recipe.id)}>
                   Delete
                 </button>
                 {recipe.is_favourite ? (
-                  <button className="button" onClick={() => handleRemoveFromFavorites(recipe.id)}>
+                  <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
                     Remove from favorites
                   </button>
                 ) : (
-                  <button className="button" onClick={() => handleToggleFavorite(recipe.id)}>
+                  <button  onClick={() => handleToggleFavorite(recipe.id)}>
                     Add to favorites
                   </button>
                 )}
@@ -179,8 +179,8 @@ return (
         ))}
       </ul>
       <div className="navigation-links">
-        <button className="button" onClick={handleBackToMainClick}>Back to main page</button>
-        <button className="button" onClick={handleSearch}>Recipe search</button>
+        <button onClick={handleBackToMainClick}>Back to main page</button>
+        <button onClick={handleSearch}>Recipe search</button>
       </div>
 
       <ToastContainer />

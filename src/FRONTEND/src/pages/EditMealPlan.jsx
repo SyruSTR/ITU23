@@ -130,9 +130,10 @@ const EditMealPlan = () => {
           </li>
         ))}
       </ul>
-
-      <button onClick={handleUpdateMealPlanner}>Update Meal Planner</button>
-      <button onClick={handleBackToMeal}>Back to meal</button>
+      <div className="recipe-actions">
+        <button onClick={handleBackToMeal}>Back to meal</button>
+        <button onClick={handleUpdateMealPlanner}>Save</button>
+      </div>
     </div>
   );
 };

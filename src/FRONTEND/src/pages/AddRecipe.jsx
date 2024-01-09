@@ -25,33 +25,41 @@ function AddRecipe() {
     setRecipeData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const formData = new FormData();
+  // Split the entered ingredients by newline
+  const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
 
-    for (const key in recipeData) {
+  const formData = new FormData();
+
+  // Set other form data
+  for (const key in recipeData) {
+    if (key === 'ingredients') {
+      formData.append(key, JSON.stringify(ingredientsArray));
+    } else {
       formData.append(key, recipeData[key]);
     }
+  }
 
-    try {
-      const response = await fetch('http://localhost:8000/api/add-recipes/', {
-        method: 'POST',
-        body: formData,
-      });
+  try {
+    const response = await fetch('http://localhost:8000/api/add-recipes/', {
+      method: 'POST',
+      body: formData,
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to add recipe');
-      }
-
-      const responseData = await response.json();
-      console.log('Recipe added successfully:', responseData);
-
-      navigate('/recipe/' + JSON.stringify(responseData['id']));
-    } catch (error) {
-      console.error('Error adding recipe:', error);
+    if (!response.ok) {
+      throw new Error('Failed to add recipe');
     }
-  };
+
+    const responseData = await response.json();
+    console.log('Recipe added successfully:', responseData);
+
+    navigate('/recipe/' + JSON.stringify(responseData['id']));
+  } catch (error) {
+    console.error('Error adding recipe:', error);
+  }
+};
 
   const handleBackToMainClick = () => {
     navigate('/');
@@ -111,7 +119,6 @@ function AddRecipe() {
         <div className="file-input-container">
           <button
               type="button"
-              className="file-input-button"
               onClick={handleBrowseClick}
           >
             Choose PNG image

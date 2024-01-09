@@ -33,26 +33,22 @@ const ShoppingList = () => {
   };
 
   return (
-    <div className="shopping-list-container">
-      <h1>Shopping List</h1>
-      {ingredients.length === 0 ? (
-        <p>No ingredients in the shopping list.</p>
-      ) : (
-        <>
-          <ul>
-            {ingredients.map(ingredient => (
-              <li key={ingredient.id}>
-                <span>{ingredient.ingredient}</span>
-                <button onClick={() => handleDelete(ingredient.id)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-          <div className="navigation-links">
-            <button className="button" onClick={handleBackToMainMenu}>Back to main page</button>
-          </div>
-        </>
-      )}
-    </div>
+      <div className="shopping-list-container">
+        <h1>Shopping List</h1>
+        {ingredients.length === 0 ? (
+            <p>No ingredients in the shopping list.</p>
+        ) : (
+            <ul>
+              {ingredients.map(ingredient => (
+                  <li key={ingredient.id}>
+                    <span>{ingredient.ingredient}</span>
+                    <button onClick={() => handleDelete(ingredient.id)}>Remove</button>
+                  </li>
+              ))}
+            </ul>
+        )}
+        <button onClick={handleBackToMainMenu}>Back to main page</button>
+      </div>
   );
 };
 

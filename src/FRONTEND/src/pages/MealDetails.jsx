@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 const MealDetails = () => {
@@ -26,9 +26,8 @@ const MealDetails = () => {
     fetchData();
   }, [id]);
 
-  const getRecipeNameById = (recipeId) => {
-    const recipe = recipes.find((r) => r.id === recipeId);
-    return recipe ? recipe.name : 'Recipe not found';
+  const getRecipeById = (recipeId) => {
+    return recipes.find((r) => r.id === recipeId);
   };
 
   const handleDeleteMealPlanner = async () => {
@@ -52,40 +51,73 @@ const MealDetails = () => {
     navigate(`/meal-planner/my-meals/meal-details/${id}/edit-meal/${id}`);
   };
 
+  const handleBackToMeals = () => {
+    navigate("/meal-planner/my-meals");
+  };
+
   if (!mealPlanner || !recipes.length) {
     return <p>Loading...</p>;
   }
 
-  const handleBackToMeals = () => {
-    navigate("/meal-planner/my-meals")
+  const handleDeleteRecipeFromMeal = async (recipeId) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/meal-planner/${id}/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        console.log('Meal planner deleted successfully');
+        navigate('/meal-planner/my-meals');
+      } else {
+        console.error('Failed to delete meal planner');
+      }
+    } catch (error) {
+      console.error('Error deleting meal planner:', error);
+    }
   };
 
-  return (
+return (
     <div className="meal-details-container">
       <Header />
       <div className="meal-details-content">
         <h1>Meal Details</h1>
         <p className="detail-text">Date: {mealPlanner.date}</p>
-        <p className="detail-text">Meal Type: {mealPlanner.meal_type}</p>
+        <p className="detail-text">Meal type: {mealPlanner.meal_type}</p>
         <p className="detail-text">Recipes:</p>
         <ul className="recipe-list">
-          {mealPlanner.recipes.map((recipeId) => (
-            <li key={recipeId} className="recipe-item">
-              {getRecipeNameById(recipeId)}
-            </li>
+          {recipes.map((recipe) => (
+              <li className="recipe-item" key={recipe.id}>
+                <Link to={`/recipe/${recipe.id}`} className="recipe-link">
+                  <div className="recipe-details">
+                    {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image"/>}
+                    <div className="text-details">
+                      <h2 className="recipe-name">{recipe.name}</h2>
+                      <p className="recipe-description">{recipe.description}</p>
+                    </div>
+                  </div>
+                </Link>
+                <div className="recipe-actions" onClick={(e) => e.stopPropagation()}>
+                  <button onClick={() => handleDeleteRecipeFromMeal(recipe.id)}>
+                    Delete
+                  </button>
+                </div>
+              </li>
           ))}
         </ul>
         <div className="recipe-actions">
-          <button className="edit-button" onClick={handleUpdateMealPlanner}>
+          <button className="edit-button-item" onClick={handleUpdateMealPlanner}>
             Edit Meal Plan
           </button>
-          <button className="button" onClick={handleBackToMeals}>
+          <button className="button-item" onClick={handleBackToMeals}>
             Back to Your Meals
           </button>
         </div>
       </div>
     </div>
-  );
+);
 };
 
 export default MealDetails;

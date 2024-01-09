@@ -11,11 +11,9 @@ function Favorites() {
 
 
   useEffect(() => {
-    // Fetch recipes from the API
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        // Filter recipes with is_favorite set to true
         const favorites = data.filter(recipe => recipe.is_favourite);
         setFavoriteRecipes(favorites);
       })
@@ -38,16 +36,13 @@ function Favorites() {
         return;
       }
 
-      // Update the state to reflect the changes
       const updatedFavoriteRecipes = favoriteRecipes.filter(recipe => recipe.id !== recipeId);
       setFavoriteRecipes(updatedFavoriteRecipes);
 
-      // Show success message
       toast.success('Recipe removed from favorites!', { autoClose: 2000 });
     } catch (error) {
       console.error('Error while removing recipe from favorites', error);
 
-      // Show error message
       toast.error('Failed to remove recipe from favorites');
     }
   };
@@ -62,23 +57,25 @@ function Favorites() {
       <h1>My favorite recipes</h1>
       <ul className="recipe-list">
         {favoriteRecipes.map((recipe) => (
-          <li className="recipe-item" key={recipe.id}>
-            <Link to={`/recipe/${recipe.id}`} className="recipe-link">
-              <div className="recipe-details">
-                {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image" />}
-                <div className="text-details">
-                  <h2 className="recipe-name">{recipe.name}</h2>
-                  <p className="recipe-description">{recipe.description}</p>
+            <li className="recipe-item" key={recipe.id}>
+                <Link to={`/recipe/${recipe.id}`} className="recipe-link">
+                    <div className="recipe-details">
+                        {recipe.picture && <img src={recipe.picture} alt={recipe.name} className="recipe-image"/>}
+                        <div className="text-details">
+                            <h2 className="recipe-name">{recipe.name}</h2>
+                            <p className="recipe-description">{recipe.description}</p>
+                        </div>
+                    </div>
+                </Link>
+                <div className="recipe-actions">
+                    <button onClick={() => handleRemoveFromFavorites(recipe.id)}>
+                        Remove from favorites
+                    </button>
                 </div>
-              </div>
-            </Link>
-            <button className="button" onClick={() => handleRemoveFromFavorites(recipe.id)}>
-              Remove from favorites
-            </button>
-          </li>
-        ))}
+            </li>
+            ))}
       </ul>
-      <div className="navigation-links">
+        <div className="navigation-links">
         <button className="button" onClick={handleBackToMainClick}>Back to Main Page</button>
       </div>
 
