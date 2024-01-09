@@ -629,8 +629,7 @@ a:hover {
 
 .notes-ingr-desc {
   display: flex;
-
-  margin-top: 20px;
+    margin: 20px;
 }
 
 .pic-desc {
@@ -737,6 +736,22 @@ a:hover {
   margin: 20px;
 }
 
+.recipe-ingrs {
+  border-radius: 8px;
+  width: 400px;
+  border: 2px solid #ccc;
+    margin-right: 10px;
+}
+
 .recipe-notes {
-  align-items: end;
+  margin-left: 10px;
+  width: 400px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
+
+.ul-ingrs-notes {
+  margin-left: -20px;
+  margin-right: 20px;
 }

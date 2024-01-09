@@ -28,14 +28,14 @@ function AddRecipe() {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-    const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
+  const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
+  const notesArray = recipeData.notes.split('\n').map(note => note.trim());
 
   const formData = new FormData();
 
-
   for (const key in recipeData) {
-    if (key === 'ingredients') {
-      formData.append(key, JSON.stringify(ingredientsArray));
+    if (key === 'ingredients' || key === 'notes') {
+      formData.append(key, JSON.stringify(key === 'ingredients' ? ingredientsArray : notesArray));
     } else {
       formData.append(key, recipeData[key]);
     }
@@ -59,6 +59,7 @@ const handleSubmit = async (e) => {
     console.error('Error adding recipe:', error);
   }
 };
+
 
   const handleBackToMainClick = () => {
     navigate('/');
