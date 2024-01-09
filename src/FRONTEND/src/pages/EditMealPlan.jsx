@@ -62,10 +62,6 @@ const EditMealPlan = () => {
     });
   };
 
-  const handleMealTypeChange = (type) => {
-    setFormData({ ...formData, meal_type: type });
-  };
-
   const handleUpdateMealPlanner = async () => {
     try {
 
@@ -104,37 +100,17 @@ const EditMealPlan = () => {
 
   return (
     <div className="container">
-      <Header />
+      <Header /> {/* Include the Header component */}
       <h1>Edit Meal Plan</h1>
       <label htmlFor="date">Date:</label>
       <input type="date" id="date" name="date" value={formData.date} onChange={handleInputChange} />
 
-      <label>Meal Type:</label>
-      <div className="meal-type-options" style={{ display: 'flex', gap: '10px' }}>
-        <button
-          type="button"
-          className={`meal-type-button breakfast ${formData.meal_type === 'breakfast' ? 'selected' : ''}`}
-          onClick={() => handleMealTypeChange('breakfast')}
-        >
-          Breakfast
-        </button>
-
-        <button
-          type="button"
-          className={`meal-type-button lunch ${formData.meal_type === 'lunch' ? 'selected' : ''}`}
-          onClick={() => handleMealTypeChange('lunch')}
-        >
-          Lunch
-        </button>
-
-        <button
-          type="button"
-          className={`meal-type-button dinner ${formData.meal_type === 'dinner' ? 'selected' : ''}`}
-          onClick={() => handleMealTypeChange('dinner')}
-        >
-          Dinner
-        </button>
-      </div>
+      <label htmlFor="mealType">Meal Type:</label>
+      <select id="mealType" name="meal_type" value={formData.meal_type} onChange={handleInputChange}>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+      </select>
 
       <label htmlFor="recipes">Recipes:</label>
       <ul>

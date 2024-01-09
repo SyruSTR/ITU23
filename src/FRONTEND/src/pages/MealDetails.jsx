@@ -26,27 +26,6 @@ const MealDetails = () => {
     fetchData();
   }, [id]);
 
-  const getRecipeById = (recipeId) => {
-    return recipes.find((r) => r.id === recipeId);
-  };
-
-  const handleDeleteMealPlanner = async () => {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/api/meal-planner/${id}/`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        console.log('Meal Planner deleted successfully');
-        navigate('/meal-planner/my-meals');
-      } else {
-        console.error('Failed to delete Meal Planner');
-      }
-    } catch (error) {
-      console.error('Error deleting Meal Planner:', error);
-    }
-  };
-
   const handleUpdateMealPlanner = () => {
     navigate(`/meal-planner/my-meals/meal-details/${id}/edit-meal/${id}`);
   };

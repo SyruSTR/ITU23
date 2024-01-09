@@ -10,7 +10,6 @@ const EditRecipe = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}/`)
       .then((response) => response.json())
       .then((data) => {
@@ -19,19 +18,25 @@ const EditRecipe = () => {
       .catch((error) => console.error('Error fetching recipe details for editing:', error));
   }, [recipeId]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (name, value) => {
     setEditedRecipe((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSaveClick = async () => {
     try {
+      const formData = new FormData();
+
+      for (const key in editedRecipe) {
+        if (key === 'picture' && editedRecipe[key] instanceof File) {
+          formData.append(key, editedRecipe[key]);
+        } else {
+          formData.append(key, editedRecipe[key]);
+        }
+      }
+
       const response = await fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}/`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(editedRecipe),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -40,7 +45,6 @@ const EditRecipe = () => {
 
       console.log('Recipe updated successfully');
       navigate(`/recipe/${recipeId}`);
-
     } catch (error) {
       console.error('Error updating recipe:', error);
     }
@@ -51,11 +55,13 @@ const EditRecipe = () => {
   };
 
   const handleFileInputChange = (e) => {
-    handleInputChange('picture', e.target.files[0]);
+    const file = e.target.files[0];
+    handleInputChange('picture', file);
+    console.log(file);
   };
 
   const handleBrowseClick = () => {
-
+    // Trigger the file input when the styled button is clicked
     document.getElementById('fileInput').click();
   };
 
@@ -65,7 +71,7 @@ const EditRecipe = () => {
 
   return (
     <div className="container">
-      <Header /> {}
+      <Header />
       {editedRecipe && (
           <>
             <h1>Edit Recipe</h1>
@@ -109,7 +115,6 @@ const EditRecipe = () => {
             <div className="file-input-container">
               <button
                   type="button"
-                  className="file-input-button"
                   onClick={handleBrowseClick}
               >
                 Choose PNG image

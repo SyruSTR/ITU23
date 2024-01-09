@@ -28,8 +28,7 @@ function AddRecipe() {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-
-  const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
+    const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
 
   const formData = new FormData();
 
@@ -70,7 +69,6 @@ const handleSubmit = async (e) => {
   };
 
   const handleBrowseClick = () => {
-
     document.getElementById('fileInput').click();
   };
 
