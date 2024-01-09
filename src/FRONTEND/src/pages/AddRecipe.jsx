@@ -28,12 +28,12 @@ function AddRecipe() {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // Split the entered ingredients by newline
+
   const ingredientsArray = recipeData.ingredients.split('\n').map(ingredient => ingredient.trim());
 
   const formData = new FormData();
 
-  // Set other form data
+
   for (const key in recipeData) {
     if (key === 'ingredients') {
       formData.append(key, JSON.stringify(ingredientsArray));
@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
   };
 
   const handleBrowseClick = () => {
-    // Trigger the file input when the styled button is clicked
+
     document.getElementById('fileInput').click();
   };
 

@@ -41,7 +41,7 @@ const MyMeals = () => {
         method: 'DELETE',
       });
 
-      // Update the mealPlanners state by filtering out the deleted meal
+
       setMealPlanners((prevMealPlanners) =>
         prevMealPlanners.filter((meal) => meal.id !== mealId)
       );

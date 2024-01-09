@@ -12,7 +12,7 @@ function Tags() {
 
     const handleTagClick = (tag) => {
         setSelectedTag(tag);
-        // Simulated search functionality (replace with actual search logic)
+
         const results = [
             {
                 id: 1,

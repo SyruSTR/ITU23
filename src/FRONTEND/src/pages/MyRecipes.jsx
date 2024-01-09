@@ -16,7 +16,7 @@ function MyRecipes() {
 
   useEffect(() => {
 
-    // Fetch all recipes
+
     fetch(apiUrl)
         .then((response) => {
           if (!response.ok) {
@@ -65,7 +65,7 @@ const handleToggleFavorite = async (recipeId) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ is_favourite: true }), // Set is_favourite to true
+      body: JSON.stringify({ is_favourite: true }),
     });
 
     if (!response.ok) {
@@ -73,7 +73,7 @@ const handleToggleFavorite = async (recipeId) => {
       return;
     }
 
-    // Update the state to reflect the changes
+
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
         return { ...recipe, is_favourite: true };
@@ -110,7 +110,7 @@ const handleToggleFavorite = async (recipeId) => {
       return;
     }
 
-    // Update the state to reflect the changes in both recipes and favoriteRecipes
+
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
         return { ...recipe, is_favourite: false };
@@ -125,12 +125,12 @@ const handleToggleFavorite = async (recipeId) => {
     setRecipes(updatedRecipes);
     setFavoriteRecipes(updatedFavoriteRecipes);
 
-    // Show success message
+
     toast.success('Recipe removed from favorites!', { autoClose: 2000 });
   } catch (error) {
     console.error('Error while removing recipe from favorites', error);
 
-    // Show error message
+
     toast.error('Failed to remove recipe from favorites');
   }
 };

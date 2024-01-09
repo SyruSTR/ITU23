@@ -10,7 +10,7 @@ const EditRecipe = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch recipe details from the API using the recipe ID from the URL params
+
     fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}/`)
       .then((response) => response.json())
       .then((data) => {
@@ -27,7 +27,7 @@ const EditRecipe = () => {
   const handleSaveClick = async () => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}/`, {
-        method: 'PUT', // Use PUT for updating an existing resource
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,7 +39,7 @@ const EditRecipe = () => {
       }
 
       console.log('Recipe updated successfully');
-      navigate(`/recipe/${recipeId}`); // Redirect to the RecipeDetail page after updating
+      navigate(`/recipe/${recipeId}`);
 
     } catch (error) {
       console.error('Error updating recipe:', error);
@@ -55,7 +55,7 @@ const EditRecipe = () => {
   };
 
   const handleBrowseClick = () => {
-    // Trigger the file input when the styled button is clicked
+
     document.getElementById('fileInput').click();
   };
 
@@ -65,7 +65,7 @@ const EditRecipe = () => {
 
   return (
     <div className="container">
-      <Header /> {/* Include the Header component */}
+      <Header /> {}
       {editedRecipe && (
           <>
             <h1>Edit Recipe</h1>

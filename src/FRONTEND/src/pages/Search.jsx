@@ -63,7 +63,7 @@ function Search() {
         return;
       }
 
-      // Update the state using the callback function to ensure you are working with the latest state
+
       setAllRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== recipeId));
     } catch (error) {
       console.error('Error while deleting recipe', error);
@@ -79,7 +79,7 @@ function Search() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ is_favourite: true }), // Set is_favourite to true
+      body: JSON.stringify({ is_favourite: true }),
     });
 
     if (!response.ok) {
@@ -87,7 +87,7 @@ function Search() {
       return;
     }
 
-    // Update the state to reflect the changes
+
     const updatedRecipes = allRecipes.map((recipe) => {
       if (recipe.id === recipeId) {
         return { ...recipe, is_favourite: true };
@@ -97,7 +97,7 @@ function Search() {
 
     setAllRecipes(updatedRecipes);
 
-    // Show success message
+
     toast.success('Recipe added to favorites!', { autoClose: 2000 });
   } catch (error) {
     console.error('Error while adding recipe to favorites', error);
@@ -111,7 +111,7 @@ function Search() {
   try {
     const url = `http://127.0.0.1:8000/api/add-recipes/${recipeId}/`;
     const response = await fetch(url, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -123,7 +123,7 @@ function Search() {
       return;
     }
 
-    // Update the state to reflect the changes in both recipes and favoriteRecipes
+
     const updatedRecipes = allRecipes.map((recipe) => {
       if (recipe.id === recipeId) {
         return { ...recipe, is_favourite: false };
@@ -138,7 +138,7 @@ function Search() {
     setAllRecipes(updatedRecipes);
     setFavoriteRecipes(updatedFavoriteRecipes);
 
-    // Show success message
+
     toast.success('Recipe removed from favorites!', { autoClose: 2000 });
   } catch (error) {
     console.error('Error while removing recipe from favorites', error);

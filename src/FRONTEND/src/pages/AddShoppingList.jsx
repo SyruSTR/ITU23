@@ -6,7 +6,7 @@ const ShoppingListPage = ({ recipeId }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch recipe details from the API
+
     const fetchRecipe = async () => {
       try {
         const response = await fetch(`http://127.0.0.1:8000/api/add-recipes/${recipeId}`);
@@ -22,7 +22,7 @@ const ShoppingListPage = ({ recipeId }) => {
   }, [recipeId]);
 
   const handleCheckboxChange = (ingredient) => {
-    // Toggle the selected state of the ingredient
+
     setSelectedIngredients((prevSelected) => {
       if (prevSelected.includes(ingredient)) {
         return prevSelected.filter((item) => item !== ingredient);
@@ -34,7 +34,7 @@ const ShoppingListPage = ({ recipeId }) => {
 
   const handleAddToShoppingList = async () => {
     try {
-      // Post selected ingredients to the shopping list endpoint
+
       await fetch('http://127.0.0.1:8000/api/shopping-list/', {
         method: 'POST',
         headers: {
@@ -45,7 +45,7 @@ const ShoppingListPage = ({ recipeId }) => {
           ingredients: selectedIngredients,
         }),
       });
-      // Optionally, you can handle success or navigate to a different page
+
       console.log('Ingredients added to shopping list successfully!');
     } catch (error) {
       console.error('Error adding ingredients to shopping list:', error);

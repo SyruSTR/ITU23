@@ -21,7 +21,7 @@ const EditMealPlan = () => {
         const recipesData = await recipesResponse.json();
         setRecipes(recipesData);
 
-        // Set initial form data based on the fetched meal planner
+
         setFormData({
           date: mealPlannerData.date,
           meal_type: mealPlannerData.meal_type,
@@ -40,7 +40,7 @@ const EditMealPlan = () => {
 
     setFormData((prevFormData) => {
       if (type === 'checkbox') {
-        // Handle checkbox changes for multiple recipe selections
+
         if (prevFormData.recipes.includes(value)) {
           return {
             ...prevFormData,
@@ -68,7 +68,7 @@ const EditMealPlan = () => {
 
   const handleUpdateMealPlanner = async () => {
     try {
-      // Convert recipe IDs to numbers before sending the request
+
       const updatedFormData = {
         ...formData,
         recipes: formData.recipes.map(id => Number(id)),
@@ -84,7 +84,7 @@ const EditMealPlan = () => {
 
       if (response.ok) {
         console.log('Meal Planner updated successfully');
-        // Redirect to the MealDetails page after successful update
+
         navigate(`/meal-planner/my-meals/meal-details/${id}`);
       } else {
         console.error('Failed to update Meal Planner');

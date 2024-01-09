@@ -90,7 +90,7 @@ const MealPlanner = () => {
           type="date"
           value={newMealPlanner.date}
           onChange={(e) => setNewMealPlanner({ ...newMealPlanner, date: e.target.value })}
-          style={{ width: '220px', margin: '5px 0' }} // Adjust width and margin as needed
+          style={{ width: '220px', margin: '5px 0' }}
         />
         <label>Meal type:</label>
         <div className="meal-type-options" style={{ display: 'flex', gap: '10px' }}>
