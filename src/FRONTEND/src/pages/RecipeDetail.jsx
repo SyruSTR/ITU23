@@ -35,15 +35,18 @@
       return (
         <ul className="recipe-ingrs">
           {ingredientsArray.map((ingredient, index) => (
-            <li key={index} className="ingredient-item">
-              {ingredient.trim()}
+            <div key={index} className="ingredient-item">
+              <div className="ingredient-name">
+                {ingredient.trim()}
+              </div>
+
               <button
                 className="add-to-list-button"
                 onClick={() => handleAddToShoppingList(ingredient.trim())}
               >
-                Add to Shopping List
+                Add to cart
               </button>
-            </li>
+            </div>
           ))}
         </ul>
       );
